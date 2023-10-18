@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  user_name: MyString
+  email: MyString
+  password: MyString
+  opt: MyString
+  otp_sent_at: MyString
+  type: 
+  subscription: one
+
+two:
+  name: MyString
+  user_name: MyString
+  email: MyString
+  password: MyString
+  opt: MyString
+  otp_sent_at: MyString
+  type: 
+  subscription: two

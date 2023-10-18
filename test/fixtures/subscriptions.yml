@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_date: 2023-10-18 11:26:49
+  end_date: 2023-10-18 11:26:49
+  duration: MyString
+  price: 9.99
+
+two:
+  start_date: 2023-10-18 11:26:49
+  end_date: 2023-10-18 11:26:49
+  duration: MyString
+  price: 9.99

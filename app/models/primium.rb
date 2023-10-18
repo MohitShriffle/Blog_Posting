@@ -1,0 +1,2 @@
+class Primium < User
+end
