@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# user class
 class User < ApplicationRecord
   has_secure_password
   belongs_to :subscription, optional: true
@@ -11,6 +14,7 @@ class User < ApplicationRecord
 
   def validate_email
     return unless (email =~ /^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$/).nil?
+
     errors.add(:email, 'please enter a valid email')
   end
 
@@ -20,24 +24,24 @@ class User < ApplicationRecord
   #   UserMailer.send_otp(self).deliver_now
   # end
 
-  def generate_password_token!
-    debugger
+  def generate_otp!
     self.otp = generate_token
     self.otp_sent_at = Time.now.utc
     save!
   end
-  
+
   def otp_valid?
-    (self.otp_sent_at + 4.hours) > Time.now.utc
+    (otp_sent_at + 4.hours) > Time.now.utc
   end
-  
-  def reset_otp!(password)
-    self.reset_password_token = nil
+
+  def reset_otp!(_password)
+    self.otp = nil
     # self.password = password
     # save!
   end
 
   private
+
   def generate_otp
     SecureRandom.hex(6)
   end

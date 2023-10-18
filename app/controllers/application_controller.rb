@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# AuthenticationController class
 class ApplicationController < ActionController::API
   include JwtToken
   before_action :authenticate_user
@@ -7,7 +10,7 @@ class ApplicationController < ActionController::API
   end
 
   private
-  
+
   def authenticate_user
     header = request.headers['Authorization']
     header = header.split(' ').last if header

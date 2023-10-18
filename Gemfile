@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -45,8 +47,8 @@ gem 'bootsnap', require: false
 # Use Sass to process CSS
 # gem "sassc-rails"
 gem 'byebug', '~> 11.1', '>= 11.1.3'
+gem 'image_processing', '~> 1.2'
 gem 'jwt'
-gem "image_processing", "~> 1.2"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 gem 'rubocop-rails', require: false
