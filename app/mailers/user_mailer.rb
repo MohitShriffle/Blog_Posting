@@ -6,4 +6,8 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     mail(to: @user.email, subject: 'Welcome To My Webside!')
   end
+  def sent_otp_email(user)
+    @user=user
+    mail(to: @user.email, subject: 'Varification With Otp Email')
+  end
 end
