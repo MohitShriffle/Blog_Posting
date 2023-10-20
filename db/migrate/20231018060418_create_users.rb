@@ -11,8 +11,6 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :opt
       t.datetime :otp_sent_at
       t.string :type
-      t.references :subscription, null: false, foreign_key: true
-
       t.timestamps
     end
   end

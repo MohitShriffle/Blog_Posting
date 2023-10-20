@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   resources :users
   resources :blogs
   post 'users/login', to: 'authentication#login'
-  post 'users/sent_otp',to:'users#sent_otp'
-  post 'users/verification',to: 'users#verification'
-  
+  post 'users/sent_otp', to: 'users#sent_otp'
+  post 'users/verification', to: 'users#verification'
 end

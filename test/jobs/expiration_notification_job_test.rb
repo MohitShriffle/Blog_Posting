@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class BlogsControllerTest < ActionDispatch::IntegrationTest
+class ExpirationNotificationJobTest < ActiveJob::TestCase
   # test "the truth" do
   #   assert true
   # end
