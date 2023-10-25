@@ -64,7 +64,7 @@ class BlogsController < ApplicationController
   end
 
   def check_can_update?
-    if @current_user.type == 'Primium'
+    if @current_user.type == 'Premium'
       return true
     elsif @blog.user == @current_user && @blog.modifications_count < 2
       return true

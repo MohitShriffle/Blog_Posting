@@ -3,9 +3,9 @@
 # user class
 class User < ApplicationRecord
   has_secure_password
-  has_one  :subscription
-  # belongs_to :plan
-  has_many :blogs
+  has_one :subscription, dependent: :destroy
+  belongs_to :plan, optional: true
+  has_many :blogs, dependent: :destroy
   has_one_attached :profile_picture
   validates :email, uniqueness: true
   validates :email, presence: true

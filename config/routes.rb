@@ -7,6 +7,14 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :users
   resources :blogs
+  resources :users do 
+    resources :subscriptions 
+  end
+  resources :users do
+    resources :blogs 
+  end
+  resources :plans
+  resources :subscriptions
   post 'users/login', to: 'authentication#login'
   post 'users/sent_otp', to: 'users#sent_otp'
   post 'users/verification', to: 'users#verification'

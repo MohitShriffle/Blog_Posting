@@ -2,7 +2,7 @@
 
 # class Plan
 class Plan < ApplicationRecord
-  has_many :subscriptions
+  has_many :subscriptions, dependent: :destroy
   validates :name, inclusion: { in: %w[Basic Premium], message: '%<value>s is not a valid name' }
   validates :duration, inclusion: { in: %w[Weekly Monthly], message: '%<value>s is not a valid duration' }
   validates :duration, :price, :active, presence: true

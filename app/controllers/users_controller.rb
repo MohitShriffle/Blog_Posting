@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     if user.present?
       user.reset_otp!
       # UserMailer.sent_otp_email(user).deliver_later
-      render json: { status: 'ok' }, status: :ok
+      render json: { status: 'Otp Send Succesfully' }, status: :ok
     else
       render json: { error: ['Email address not found. Please check and try again.'] }, status: :not_found
     end
