@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
     user = User.find_by(email: params[:email])
     if user.present?
-      user.reset_otp!
+      user.reset_otp
       # UserMailer.sent_otp_email(user).deliver_later
       render json: { status: 'Otp Send Succesfully' }, status: :ok
     else
@@ -36,9 +36,9 @@ class UsersController < ApplicationController
   def verification
     otp = params[:otp].to_s
     user = User.find_by(otp:)
-    if user.present? && user.otp_valid?
+    if user.present? && user.otp_valid
       if user.complete_verification
-        render json: { status: 'ok' }, status: :ok
+        render json: { status: 'Varification Successful' }, status: :ok
       else
         render json: { error: user.errors.full_messages }, status: :unprocessable_entity
       end

@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   post 'users/login', to: 'authentication#login'
   post 'users/sent_otp', to: 'users#sent_otp'
   post 'users/verification', to: 'users#verification'
+  get 'blogs/view_blog/:id', to: 'blogs#view_blog'
 end

@@ -8,12 +8,14 @@ class SubscriptionsController < ApplicationController
     render json: @current_user.subscriptions
   end
 
-  def show; end
+  def show
+    render json: @subscription
+  end
 
   def create
     plan = Plan.find(subscription_params[:plan_id])
     subscription = @current_user.build_subscription(subscription_params.merge(plan_id: plan.id))
-    if subscription
+    if subscription.save
       render json: subscription, status: :created
     else
       render json: { errors: subscription.errors.full_messages }, status: :unprocessable_entity
@@ -21,12 +23,16 @@ class SubscriptionsController < ApplicationController
   end
 
   def update
-    if @subcription.update(subscription_params)
+    return unless @subscription.user == @current_user
+
+    if @subscription.update(subscription_params)
       render json: @subcription, status: :ok
     else
       render json: { message: @subcription.errors.full_messages }, status: :unprocessable_entity
     end
   end
+
+  def destroy; end
 
   private
 
@@ -35,12 +41,13 @@ class SubscriptionsController < ApplicationController
       :start_date,
       :end_date,
       :auto_renewal,
+      :status,
       :plan_id,
       :user_id
     )
   end
 
   def set_subscription
-    @subscription = @current_user.subscription.find(params[:id])
+    @subscription = Subscription.find(params[:id])
   end
 end

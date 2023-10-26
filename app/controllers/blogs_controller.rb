@@ -4,22 +4,45 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: %i[show update destroy]
 
-  def index
-    blogs = Blog.all
-    if @current_user.type == 'Normal'
-      blogs.each_with_index do |_b, i|
-        next unless i < 5
+  # def index
+  #   blogs = Blog.all
+  #   if @current_user.type == 'Normal'
+  #     blogs.each_with_index do |_b, i|
+  #       next unless i < 5
 
-        render json: blogs
-        # else
-        #   render json: blogs.title
-      end
+  #       render json: blogs
+  #       # else
+  #       #   render json: blogs.title
+  #     end
+  #   else
+  #     render json: blogs
+  #   end
+  # end
+
+  def index
+    if @current_user.type == 'Premium'
+      response = HTTParty.get('https://jsonplaceholder.typicode.com/posts')
+      blogs = JSON.parse(response.body)
     else
-      render json: blogs
+      blogs = Blog.all
     end
+    render json: blogs, status: :ok
   end
 
-  def show; end
+  def show
+    blog = Blog.find(params[:id])
+    if @current_user.type == 'Premium' || blog.user == @current_user
+      render json: blog, status: :ok
+    else
+      user = @current_user
+      if user.can_view_blog(blog)
+        render json: blog
+        BlogView.create(user:, blog:, viewed_at: Time.now)
+      else
+        render json: { errors: 'You have reached the maximum limit To show .' }, status: :forbidden
+      end
+    end
+  end
 
   def create
     blog = @current_user.blogs.new(blog_params)
@@ -29,6 +52,21 @@ class BlogsController < ApplicationController
       render json: { errors: blog.error.full_messages }, status: :unprocessable_entity
     end
   end
+
+  # def view_blog
+  #   blog = Blog.find(params[:id])
+  #   unless @current_user.type == "Premium" || blog.user == @current_user
+  #     user = @current_user
+  #     if user.can_view_blog(blog)
+  #       render json: blog
+  #       BlogView.create(user: user, blog: blog, viewed_at: Time.now)
+  #     else
+  #       render json: { errors: 'You have reached the maximum limit To show .' }, status: :forbidden
+  #     end
+  #   else
+  #     render json: blog, status: :ok
+  #   end
+  # end
 
   # def update
   #   if @current_user.type == "Normal"
