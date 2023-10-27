@@ -18,16 +18,39 @@ class BlogsController < ApplicationController
   #     render json: blogs
   #   end
   # end
+  
+def index
+  if @current_user.type == 'Normal'
 
-  def index
-    if @current_user.type == 'Premium'
-      response = HTTParty.get('https://jsonplaceholder.typicode.com/posts')
-      blogs = JSON.parse(response.body)
+    start_time = Time.now.beginning_of_day + 12.hours
+    end_time = Time.now.end_of_day + 12.hours
+    viewed_blogs_count = @current_user.viewed_blogs.where(created_at: start_time..end_time).count
+
+    if viewed_blogs_count >= 5
+     
+      limited_blogs = Blog.where.not(user_id: @current_user.id).limit(5)
+      render json: limited_blogs.map { |blog| { title: blog.title, author: blog.user.name } }
     else
-      blogs = Blog.all
+     
+      blogs_to_display = Blog.where.not(user_id: @current_user.id).sample(5)
+      render json: blogs_to_display
+     
+      @current_user.viewed_blogs.create(blog_ids: blogs_to_display.pluck(:id))
     end
-    render json: blogs, status: :ok
+  else
+    
+    render json: Blog.all
   end
+end
+  # def index
+  #   if @current_user.type == 'Premium'
+  #     response = HTTParty.get('https://jsonplaceholder.typicode.com/posts')
+  #     blogs = JSON.parse(response.body)
+  #   else
+  #     blogs = Blog.all
+  #   end
+  #   render json: blogs, status: :ok
+  # end
 
   def show
     blog = Blog.find(params[:id])

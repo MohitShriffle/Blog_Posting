@@ -7,7 +7,9 @@ class PlansController < ApplicationController
     render json: Plan.all
   end
 
-  def show; end
+  def show
+    render json: @plan
+  end
 
   def create
     plan = Plan.new(plan_params)

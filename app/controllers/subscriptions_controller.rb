@@ -14,6 +14,7 @@ class SubscriptionsController < ApplicationController
 
   def create
     plan = Plan.find(subscription_params[:plan_id])
+    byebug
     subscription = @current_user.build_subscription(subscription_params.merge(plan_id: plan.id))
     if subscription.save
       render json: subscription, status: :created
@@ -32,7 +33,15 @@ class SubscriptionsController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    return unless @subscription.user == @current_user
+
+    if @subcription.destroy
+      render json: { message: 'Subscription Deleted Succesfully' }
+    else
+      @subcription.errors.full_messages
+    end
+  end
 
   private
 

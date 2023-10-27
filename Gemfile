@@ -11,24 +11,23 @@ gem 'rubocop-rails', require: false
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'httparty'
-gem 'sidekiq'
 gem 'sprockets-rails'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 gem 'will_paginate', '~>3.0'
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
-
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'cancancan'
 gem 'importmap-rails'
-
+gem 'redis', '~> 4.8.0'
+gem 'sidekiq', '~> 6.1.0'
+gem 'sidekiq-cron'
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem 'letter_opener'
 gem 'turbo-rails'
-
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem 'stimulus-rails'
-
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'active_model_serializers'
 gem 'jbuilder'
