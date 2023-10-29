@@ -3,55 +3,35 @@
 # class BlogsController
 class BlogsController < ApplicationController
   before_action :set_blog, only: %i[show update destroy]
-
-  # def index
-  #   blogs = Blog.all
-  #   if @current_user.type == 'Normal'
-  #     blogs.each_with_index do |_b, i|
-  #       next unless i < 5
-
-  #       render json: blogs
-  #       # else
-  #       #   render json: blogs.title
-  #     end
-  #   else
-  #     render json: blogs
-  #   end
-  # end
+  def index
+    blogs1 = [] 
   
-def index
-  if @current_user.type == 'Normal'
-
-    start_time = Time.now.beginning_of_day + 12.hours
-    end_time = Time.now.end_of_day + 12.hours
-    viewed_blogs_count = @current_user.viewed_blogs.where(created_at: start_time..end_time).count
-
-    if viewed_blogs_count >= 5
-     
-      limited_blogs = Blog.where.not(user_id: @current_user.id).limit(5)
-      render json: limited_blogs.map { |blog| { title: blog.title, author: blog.user.name } }
+    if @current_user.type == 'Premium'
+      response = HTTParty.get('https://jsonplaceholder.typicode.com/posts')
+      blogs1.concat(JSON.parse(response.body))
+      blogs1.concat(Blog.all)
+      render json: blogs1, status: :ok
     else
-     
-      blogs_to_display = Blog.where.not(user_id: @current_user.id).sample(5)
-      render json: blogs_to_display
-     
-      @current_user.viewed_blogs.create(blog_ids: blogs_to_display.pluck(:id))
+      @blogs = Blog.all
+      render json: @blogs, status: :ok
     end
-  else
-    
-    render json: Blog.all
   end
-end
-  # def index
-  #   if @current_user.type == 'Premium'
-  #     response = HTTParty.get('https://jsonplaceholder.typicode.com/posts')
-  #     blogs = JSON.parse(response.body)
-  #   else
-  #     blogs = Blog.all
-  #   end
-  #   render json: blogs, status: :ok
-  # end
-
+  
+  
+  def show_blog
+    if @current_user.views_count_within_24_hours >= 5
+      limited_blog = {
+        title: @blog.title,
+        author: @blog.user.name,
+        description: @blog.description,
+        content: 'Content is restricted due to daily view limit.'
+      }
+      render json: limited_blog, status: :ok
+    else
+      BlogView.create(user: current_user, blog: blog, viewed_at: Time.now)
+      render json: @blog, status: :ok
+    end
+  end
   def show
     blog = Blog.find(params[:id])
     if @current_user.type == 'Premium' || blog.user == @current_user

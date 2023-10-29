@@ -11,3 +11,4 @@ class ExpirationNotificationJob < ApplicationJob
     end
   end
 end
+

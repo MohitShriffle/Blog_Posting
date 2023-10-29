@@ -1,0 +1,15 @@
+:schedule:
+  expiration_notification_job:
+    cron: "* * * * *"
+    class: "ExpirationNotificationJob"
+    queue: "default"
+
+  expiration_notification_job:
+    cron: '* * * * *'
+    class: 'SubscriptionExpirationJob'
+    queue: 'default'
+
+  subscription_renewal_job:
+    cron: '0 0 * * *'   
+    class: 'SubscriptionRenewalJob'
+    queue: 'default'

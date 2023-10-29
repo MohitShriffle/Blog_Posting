@@ -1,3 +1,4 @@
+
 # frozen_string_literal: true
 
 # user class
@@ -43,5 +44,8 @@ class User < ApplicationRecord
 
   def generate_otp
     '%06d' % rand(6**6)
+  end
+  def views_count_within_24_hours
+    blog_views.where('viewed_at >= ? AND viewed_at <= ?', Time.now - 24.hours, Time.now).count
   end
 end

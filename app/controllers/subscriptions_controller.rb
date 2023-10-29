@@ -14,7 +14,6 @@ class SubscriptionsController < ApplicationController
 
   def create
     plan = Plan.find(subscription_params[:plan_id])
-    byebug
     subscription = @current_user.build_subscription(subscription_params.merge(plan_id: plan.id))
     if subscription.save
       render json: subscription, status: :created
