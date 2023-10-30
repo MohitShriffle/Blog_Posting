@@ -2,7 +2,7 @@
 
 # class SubscriptionsController
 class SubscriptionsController < ApplicationController
-  before_action :set_subscription, only: %i[show update]
+  before_action :set_subscription, only: %i[show update destroy]
 
   def index
     render json: @current_user.subscriptions
@@ -33,9 +33,10 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
+    byebug
     return unless @subscription.user == @current_user
 
-    if @subcription.destroy
+    if @subscription.destroy
       render json: { message: 'Subscription Deleted Succesfully' }
     else
       @subcription.errors.full_messages

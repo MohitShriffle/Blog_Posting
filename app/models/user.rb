@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_secure_password
   has_one :subscription, dependent: :destroy
   has_many :blogs, dependent: :destroy
-  has_many :blogviews, dependent: :destroy
+  has_many :blogviews, dependent: :destroy,class_name: 'BlogView'
   belongs_to :plan, optional: true
 
   has_one_attached :profile_picture

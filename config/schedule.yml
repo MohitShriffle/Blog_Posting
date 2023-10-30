@@ -13,3 +13,8 @@
     cron: '0 0 * * *'   
     class: 'SubscriptionRenewalJob'
     queue: 'default'
+   
+  resetblogview_job:
+    cron: '* 0 * * *'
+    class: 'ResetblogviewJob'
+    queue: 'default'
