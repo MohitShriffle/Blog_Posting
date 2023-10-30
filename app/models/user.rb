@@ -17,7 +17,7 @@ class User < ApplicationRecord
   validate  :validate_email
 
   def can_view_blog(blog)
-    return true if BlogView.where(blog:, viewed_at: 1.hours.ago..Time.now).count < 5
+    return true if BlogView.where(blog:, viewed_at: 24.hours.ago..Time.now).count < 5
 
     false
   end
@@ -46,6 +46,6 @@ class User < ApplicationRecord
     '%06d' % rand(6**6)
   end
   def views_count_within_24_hours
-    blog_views.where('viewed_at >= ? AND viewed_at <= ?', Time.now - 24.hours, Time.now).count
+   self.blog_views.where('viewed_at >= ? AND viewed_at <= ?', Time.now - 24.hours, Time.now).count
   end
 end

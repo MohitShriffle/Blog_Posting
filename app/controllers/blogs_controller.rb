@@ -2,7 +2,7 @@
 
 # class BlogsController
 class BlogsController < ApplicationController
-  before_action :set_blog, only: %i[show update destroy]
+  before_action :set_blog, only: %i[show update destroy show_blog]
   def index
     blogs1 = [] 
   
@@ -19,21 +19,24 @@ class BlogsController < ApplicationController
   
   
   def show_blog
-    if @current_user.views_count_within_24_hours >= 5
-      limited_blog = {
-        title: @blog.title,
-        author: @blog.user.name,
-        description: @blog.description,
-        content: 'Content is restricted due to daily view limit.'
-      }
-      render json: limited_blog, status: :ok
+    if @current_user == 'Normal'
+      if @current_user.views_count_within_24_hours >= 5
+        limited_blog = {
+          title: @blog.title,
+          author: @blog.user.name,
+          content: 'Content is restricted due to daily view limit.'
+         }
+        render json: limited_blog, status: :ok
+      else
+        BlogView.create(user: current_user, blog: blog, viewed_at: Time.now)
+        render json: @blog, status: :ok
+      end
     else
-      BlogView.create(user: current_user, blog: blog, viewed_at: Time.now)
-      render json: @blog, status: :ok
+      render json: @blog,status: :ok
     end
   end
+
   def show
-    blog = Blog.find(params[:id])
     if @current_user.type == 'Premium' || blog.user == @current_user
       render json: blog, status: :ok
     else
@@ -68,28 +71,6 @@ class BlogsController < ApplicationController
   #     end
   #   else
   #     render json: blog, status: :ok
-  #   end
-  # end
-
-  # def update
-  #   if @current_user.type == "Normal"
-  #     if @blog.user == @current_user && @blog.modifications_count < 2
-  #       if @blog.update(blog_params)
-  #         render json: @blog ,status: :ok
-  #         @blog.increment_modification_count
-  #       else
-  #         render json: { error: @blog.errors.full_messages},status: :unprocessable_entity
-  #       end
-  #     else
-  #       render json: { errors: "You have reached the maximum allowed modifications for this post." }, status: :forbidden
-  #     end
-  #   else
-  #     if @blog.update(blog_params)
-  #       render json: @blog ,status: :ok
-  #       @blog.increment_modification_count
-  #     else
-  #       render json: { error: @blog.errors.full_messages},status: :unprocessable_entity
-  #     end
   #   end
   # end
 
@@ -137,6 +118,6 @@ class BlogsController < ApplicationController
   end
 
   def set_blog
-    @blog = @current_user.blogs.find(params[:id])
+    @blog = Blog.find(params[:id])
   end
 end

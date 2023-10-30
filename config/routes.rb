@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   post 'users/sent_otp', to: 'users#sent_otp'
   post 'users/verification', to: 'users#verification'
   get 'blogs/view_blog/:id', to: 'blogs#view_blog'
+  get 'blogs/show_blog/:id', to: 'blogs#show_blog'
 end
