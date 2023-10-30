@@ -4,7 +4,10 @@
 
 class UsersController < ApplicationController
   skip_before_action :authenticate_user, only: %i[create]
-  def index; end
+  def index 
+    users=User.all
+    render json: users
+  end
 
   def show
     render json: @current_user

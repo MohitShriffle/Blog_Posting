@@ -3,6 +3,7 @@
 # class BlogsController
 class BlogsController < ApplicationController
   before_action :set_blog, only: %i[ show update destroy ]
+  load_and_authorize_resource
   def index
     blogs1 = [] 
     
@@ -10,14 +11,14 @@ class BlogsController < ApplicationController
       response = HTTParty.get('https://jsonplaceholder.typicode.com/posts')
       blogs1.concat(JSON.parse(response.body))
       blogs1.concat(Blog.all)
-      render json: blogs1.paginate(:page => params[:page], :per_page => 2)
+      # render json: blogs1.paginate(:page => params[:page], :per_page => 2)
 
-      # render json: blogs1, status: :ok
+      render json: blogs1, status: :ok
     else
       @blogs = Blog.all
-      render json: @blogs.paginate(:page => params[:page], :per_page => 1)
+      # render json: @blogs.paginate(:page => params[:page], :per_page => 1)
 
-      #  @blogs, status: :ok
+      render json:  @blogs, status: :ok
     end
   end
   
@@ -43,6 +44,7 @@ class BlogsController < ApplicationController
   end
   
   def create
+    byebug
     blog = @current_user.blogs.new(blog_params)
     if blog.save
       render json: blog, status: :created
@@ -75,8 +77,8 @@ class BlogsController < ApplicationController
   end
   
   def destroy
-    return unless @blog.user == @current_user
-    if @blog.destroy
+
+    if @blog
       render json: { errors: 'Blog Deleted succesfully'}
     else
       render json: { errors: @blog.errors.full_messages }, status: :not_found
@@ -94,6 +96,8 @@ class BlogsController < ApplicationController
   end
   
   def set_blog
+    byebug
     @blog = Blog.find(params[:id])
   end
+
 end

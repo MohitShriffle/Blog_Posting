@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 require "sidekiq/web"
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   mount Sidekiq::Web => '/sidekiq'
   # Defines the root path route ("/")

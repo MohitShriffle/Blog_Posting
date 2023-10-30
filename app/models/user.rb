@@ -48,4 +48,10 @@ class User < ApplicationRecord
   def views_count_within_24_hours
    self.blog_views.where('viewed_at >= ? AND viewed_at <= ?', Time.now - 24.hours, Time.now).count
   end
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "email", "id", "name", "otp", "otp_sent_at", "password_digest", "subscription_id", "type", "updated_at", "user_name", "verified"]
+  end
+  def self.ransackable_associations(auth_object = nil)
+    ["blogs", "blogviews", "plan", "profile_picture_attachment", "profile_picture_blob", "subscription"]
+  end
 end

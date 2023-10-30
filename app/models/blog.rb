@@ -10,4 +10,7 @@ class Blog < ApplicationRecord
   def increment_modification_count
     update(modifications_count: modifications_count + 1)
   end
+  def self.ransackable_attributes(auth_object = nil)
+    ["body", "created_at", "id", "modifications_count", "title", "updated_at", "user_id"]
+  end
 end

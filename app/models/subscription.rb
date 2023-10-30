@@ -8,13 +8,11 @@ class Subscription < ApplicationRecord
   validates :status, inclusion: { in: %w[active expired canceled],
                                   message: '%<value>s is not a valid status' }
 
-  def renew 
-    if self.auto_renewal 
-      new_end_date =self.end_date + 1.month 
-      self.update(
-        end_date: new_end_date
-        status: 'active'
-      )
-    end
-  end
+  # def renew 
+  #   if self.auto_renewal 
+  #     byebug
+  #     new_end_date =self.end_date + 1.month 
+  #     self.update(end_date: new_end_date, status: 'active')
+  #   end
+  # end
 end

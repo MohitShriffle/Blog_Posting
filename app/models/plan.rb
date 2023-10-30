@@ -7,4 +7,7 @@ class Plan < ApplicationRecord
   validates :duration, inclusion: { in: %w[Weekly Monthly], message: '%<value>s is not a valid duration' }
   validates :duration, :price, :active, presence: true
   has_many :users, through: :subscriptions
+  def self.ransackable_attributes(auth_object = nil)
+    ["active", "created_at", "duration", "id", "name", "price", "updated_at"]
+  end
 end
