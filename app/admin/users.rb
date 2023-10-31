@@ -1,5 +1,6 @@
-ActiveAdmin.register User do
+# frozen_string_literal: true
 
+ActiveAdmin.register User do
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -25,33 +26,33 @@ ActiveAdmin.register User do
   filter :user_name
   filter :email
   filter :type
-     form do |f|
-  f.inputs do
-    f.input :name
-    f.input :user_name
-    f.input :email 
-    f.input :type 
-    f.input :password
-    f.input :password_confirmation
-    f.input :profile_picture,as: :file
-  end
-  f.actions
-end
-show do
-  attributes_table do
-    row :name
-    row :user_name
-    row :email
-    if user.profile_picture.attached?
-      row :profile_picture do |img|
-      image_tag url_for(img.profile_picture),size:"120x120"
+  form do |f|
+    f.inputs do
+      f.input :name
+      f.input :user_name
+      f.input :email
+      f.input :type
+      f.input :password
+      f.input :password_confirmation
+      f.input :profile_picture, as: :file
     end
+    f.actions
+  end
+  show do
+    attributes_table do
+      row :name
+      row :user_name
+      row :email
+      if user.profile_picture.attached?
+        row :profile_picture do |img|
+          image_tag url_for(img.profile_picture), size: '120x120'
+        end
+      end
     end
   end
-end
 
-# controller { actions :all, except: [:destroy] }
+  # controller { actions :all, except: [:destroy] }
 
-# actions :index, :edit, :update, :create
-permit_params :name, :user_name, :email, :type ,:password ,:password_confirmation,:profile_picture
+  # actions :index, :edit, :update, :create
+  permit_params :name, :user_name, :email, :type, :password, :password_confirmation, :profile_picture
 end

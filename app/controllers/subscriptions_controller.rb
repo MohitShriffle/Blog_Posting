@@ -2,7 +2,7 @@
 
 # class SubscriptionsController
 class SubscriptionsController < ApplicationController
-  before_action :set_subscription, only: %i[show update destroy]
+  before_action :get_subscription, only: %i[show update destroy]
   load_and_authorize_resource
   def index
     render json: @current_user.subscriptions
@@ -24,14 +24,13 @@ class SubscriptionsController < ApplicationController
 
   def update
     if @subscription.update(subscription_params)
-      render json: @subcription, status: :ok
+      render json: @subscription, status: :ok
     else
       render json: { message: @subcription.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    byebug
     if @subscription.destroy
       render json: { message: 'Subscription Deleted Succesfully' }
     else
@@ -52,7 +51,7 @@ class SubscriptionsController < ApplicationController
     )
   end
 
-  def set_subscription
-    @subscription = Subscription.find(params[:id])
+  def get_subscription
+    Subscription.find(params[:id])
   end
 end

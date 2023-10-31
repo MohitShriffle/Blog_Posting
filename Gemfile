@@ -24,7 +24,7 @@ gem 'redis', '~> 4.8.0'
 gem 'sidekiq', '~> 6.1.0'
 gem 'sidekiq-cron'
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem 'letter_opener'
+gem 'letter_opener', group: :development
 gem 'turbo-rails'
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem 'stimulus-rails'
@@ -68,9 +68,9 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
-gem "activeadmin"
-gem "devise"
-gem "sass-rails"
+gem 'activeadmin'
+gem 'devise'
+gem 'sass-rails'
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'

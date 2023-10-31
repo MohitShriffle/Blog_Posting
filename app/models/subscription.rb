@@ -8,11 +8,14 @@ class Subscription < ApplicationRecord
   validates :status, inclusion: { in: %w[active expired canceled],
                                   message: '%<value>s is not a valid status' }
 
-  # def renew 
-  #   if self.auto_renewal 
-  #     byebug
-  #     new_end_date =self.end_date + 1.month 
-  #     self.update(end_date: new_end_date, status: 'active')
-  #   end
-  # end
+  def renew
+    return unless auto_renewal
+
+    new_end_date = end_date + 1.month
+    update(end_date: new_end_date, status: 'active')
+  end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[auto_renewal created_at end_date id plan_id start_date status updated_at user_id]
+  end
 end

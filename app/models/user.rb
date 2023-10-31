@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 
 # user class
@@ -6,7 +5,7 @@ class User < ApplicationRecord
   has_secure_password
   has_one :subscription, dependent: :destroy
   has_many :blogs, dependent: :destroy
-  has_many :blogviews, dependent: :destroy,class_name: 'BlogView'
+  has_many :blogviews, dependent: :destroy, class_name: 'BlogView'
   belongs_to :plan, optional: true
 
   has_one_attached :profile_picture
@@ -45,13 +44,17 @@ class User < ApplicationRecord
   def generate_otp
     '%06d' % rand(6**6)
   end
+
   def views_count_within_24_hours
-   self.blog_views.where('viewed_at >= ? AND viewed_at <= ?', Time.now - 24.hours, Time.now).count
+    blog_views.where('viewed_at >= ? AND viewed_at <= ?', Time.now - 24.hours, Time.now).count
   end
-  def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "email", "id", "name", "otp", "otp_sent_at", "password_digest", "subscription_id", "type", "updated_at", "user_name", "verified"]
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at email id name otp otp_sent_at password_digest subscription_id type
+       updated_at user_name verified]
   end
-  def self.ransackable_associations(auth_object = nil)
-    ["blogs", "blogviews", "plan", "profile_picture_attachment", "profile_picture_blob", "subscription"]
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[blogs blogviews plan profile_picture_attachment profile_picture_blob subscription]
   end
 end

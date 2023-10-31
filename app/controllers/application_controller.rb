@@ -4,18 +4,16 @@
 class ApplicationController < ActionController::Base
   include JwtToken
   attr_accessor :current_user
-  before_action :authenticate_user
+
+  # before_action :authenticate_user
   skip_before_action :verify_authenticity_token
-  
-  # before_action do
-  #   # ActiveStorage::Current.host = request.base_url
-  #   ActiveStorage::Current.url_options = request.base_url
-  # end
-  # before_action do
-  #   ActiveStorage::Current.url_options = { protocol: request.protocol, host: request.host, port: request.port }
-  # end
-  rescue_from CanCan::AccessDenied do |exception|
-    render json: 'Access Denied',status: :unauthorized
+
+  before_action do
+    ActiveStorage::Current.host = request.base_url
+  end
+
+  rescue_from CanCan::AccessDenied do |_exception|
+    render json: 'Access Denied', status: :unauthorized
   end
 
   private

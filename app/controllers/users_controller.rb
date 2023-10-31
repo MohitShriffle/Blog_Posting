@@ -3,10 +3,10 @@
 # class UsersController
 
 class UsersController < ApplicationController
-  skip_before_action :authenticate_user, only: %i[create]
-  def index 
-    users=User.all
-    render json: users
+  # skip_before_action :authenticate_user, only: %i[create send_otp]
+  def index
+    users = User.all
+    render json: users.paginate(page: params[:page], per_page: 2)
   end
 
   def show
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
-      # UserMailer.with(user:).welcome_email.deliver_later
+      UserMailer.with(user:).welcome_email.deliver_later
       render json: user, status: :created
     else
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     user = User.find_by(email: params[:email])
     if user.present?
       user.reset_otp
-      # UserMailer.sent_otp_email(user).deliver_later
+      UserMailer.sent_otp_email(user).deliver_now
       render json: { status: 'Otp Send Succesfully' }, status: :ok
     else
       render json: { error: ['Email address not found. Please check and try again.'] }, status: :not_found

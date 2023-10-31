@@ -11,4 +11,9 @@ class UserMailer < ApplicationMailer
     @user = user
     mail(to: @user.email, subject: 'Varification With Otp Email')
   end
+
+  def expiration_notification(user)
+    @user = user
+    mail(to: @user.email, subject: 'Subscription Expiration Notification')
+  end
 end

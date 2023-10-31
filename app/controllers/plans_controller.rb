@@ -2,6 +2,7 @@
 
 # class PlansController
 class PlansController < ApplicationController
+  load_and_authorize_resource
   before_action :set_plan, only: %i[show update destroy]
   def index
     render json: Plan.all

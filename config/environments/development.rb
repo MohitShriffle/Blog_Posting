@@ -19,6 +19,7 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
   config.active_job.queue_adapter = :sidekiq
+  
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
   
@@ -70,15 +71,15 @@ Rails.application.configure do
     host: 'localhost:3000',
     protocol: 'http'
   }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
-    port: 587,
-    user_name: 'mohitk@shriffle.com',
-    password: 'cmuxniqvrjzjsbee',
-    authentication: 'plain',
-    enable_starttls_auto: true
-  }
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   address: 'smtp.gmail.com',
+  #   port: 587,
+  #   user_name: 'mohitk@shriffle.com',
+  #   password: 'cmuxniqvrjzjsbee',
+  #   authentication: 'plain',
+  #   enable_starttls_auto: true
+  # }
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
