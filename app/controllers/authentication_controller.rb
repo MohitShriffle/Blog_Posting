@@ -2,8 +2,6 @@
 
 # AuthenticationController class
 class AuthenticationController < ApplicationController
-  skip_before_action :authenticate_user
-
   include JwtToken
   def login
     @user = User.find_by(email: params[:email])

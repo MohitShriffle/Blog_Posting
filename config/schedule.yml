@@ -5,7 +5,7 @@
     queue: "default"
 
   expiration_notification_job:
-    cron: '* * * * *'
+    cron: '0 0 * * *'
     class: 'SubscriptionExpirationJob'
     queue: 'default'
 
@@ -17,4 +17,9 @@
   resetblogview_job:
     cron: '* 0 * * *'
     class: 'ResetblogviewJob'
+    queue: 'default'
+
+  reset_user_blog_views_job:
+    cron: '1 1 * * *'
+    class: 'ResetUserBlogViewsJob'
     queue: 'default'

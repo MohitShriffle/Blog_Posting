@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   include JwtToken
   attr_accessor :current_user
 
-  # before_action :authenticate_user
   skip_before_action :verify_authenticity_token
 
   before_action do
@@ -19,10 +18,11 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_user
-    header = request.headers['Authorization']
-    header = header.split(' ').last if header
+    token = request.headers[:token] || params[:token]
+    # header = request.headers['Authorization']
+    # header = header.split(' ').last if header
     begin
-      decoded = jwt_decode(header)
+      decoded = jwt_decode(token)
       @current_user = User.find(decoded[:user_id])
     rescue ActiveRecord::RecordNotFound => e
       render json: { error: e.message }, status: :unauthorized

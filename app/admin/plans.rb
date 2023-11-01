@@ -2,6 +2,7 @@
 
 ActiveAdmin.register Plan do
   index do
+    id_column
     column :name
     column :duration
     column :price

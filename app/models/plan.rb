@@ -4,7 +4,7 @@
 class Plan < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
   validates :name, inclusion: { in: %w[Basic Premium], message: '%<value>s is not a valid name' }
-  validates :duration, inclusion: { in: %w[Weekly Monthly], message: '%<value>s is not a valid duration' }
+  enum :duration, %i[weekly monthly]
   validates :duration, :price, :active, presence: true
   has_many :users, through: :subscriptions
   def self.ransackable_attributes(_auth_object = nil)

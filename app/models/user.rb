@@ -2,6 +2,7 @@
 
 # user class
 class User < ApplicationRecord
+  paginates_per 2
   has_secure_password
   has_one :subscription, dependent: :destroy
   has_many :blogs, dependent: :destroy

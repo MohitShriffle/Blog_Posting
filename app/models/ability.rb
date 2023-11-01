@@ -5,11 +5,12 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can :manage, :all if user.type == 'admin'
     can :read, Blog, visible: true
+
     return if user.blank?
 
-    can :read, Plan
+    can :read, Plan, visible: true
+    can [:index], Plan
     can :read, Blog
     can %i[update destroy], Blog, { user: }
     can %i[update destroy], Subscription, { user: }

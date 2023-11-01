@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 # class UsersController
-
 class UsersController < ApplicationController
-  # skip_before_action :authenticate_user, only: %i[create send_otp]
+  before_action :authenticate_user, except: %i[create send_otp verification]
+  # load_and_authorize_resource
   def index
     users = User.all
-    render json: users.paginate(page: params[:page], per_page: 2)
+    render json: users.page(params[:page])
   end
 
   def show
@@ -16,14 +16,14 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
-      UserMailer.with(user:).welcome_email.deliver_later
+      UserMailer.with(user:).welcome_email.deliver_now
       render json: user, status: :created
     else
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
-  def sent_otp
+  def send_otp
     return render json: { error: 'Email not present' } if params[:email].blank?
 
     user = User.find_by(email: params[:email])

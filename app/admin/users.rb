@@ -25,6 +25,7 @@ ActiveAdmin.register User do
   filter :name
   filter :user_name
   filter :email
+  # blog_views_count :blog_views_count
   filter :type
   form do |f|
     f.inputs do

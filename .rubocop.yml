@@ -3,4 +3,5 @@ AllCops:
     - 'db/**/*'
     - 'bin/**/*'
     - 'config/**/*'
-    
+    - 'admin/**/*'
+    - 'spec/**/*'

@@ -3,6 +3,7 @@
 # class BlogsController
 class BlogsController < ApplicationController
   before_action :set_blog, only: %i[show update destroy]
+  before_action :authenticate_user
   load_and_authorize_resource
   def index
     blogs1 = []
@@ -10,13 +11,11 @@ class BlogsController < ApplicationController
       response = HTTParty.get('https://jsonplaceholder.typicode.com/posts')
       blogs1.concat(JSON.parse(response.body))
       blogs1.concat(Blog.all)
-      # render json: blogs1.paginate(:page => params[:page], :per_page => 2)
-
-      render json: blogs1, status: :ok
+      render json: blogs1.page(params[:page])
     else
-      @blogs = Blog.all
-      # render json: @blogs.paginate(:page => params[:page], :per_page => 1)
-      render json: @blogs, status: :ok
+      blogs = Blog.all
+      blogs1 = blogs.page(params[:page])
+      render json: blogs1, status: :ok
     end
   end
 
@@ -42,17 +41,14 @@ class BlogsController < ApplicationController
 
   def blog_read
     if @current_user.type == 'Normal'
-      user = @current_user
 
-      viewed_blogs_count = user.blogviews.where(created_at: start_time..end_time).count
-      if viewed_blogs_count >= 5
+      if @current_user.blog_views_count >= 5
         limited_blogs = Blog.where.not(user_id: @current_user.id).limit(5)
-        render json: limited_blogs.map { |blog| { title: blog.title, author: blog.user.name } }
+        render json: limited_blogs.map { |blog| { blog_id: blog.id, title: blog.title, author: blog.user.name } }
       else
         blogs_to_display = Blog.where.not(user_id: @current_user.id).sample(5)
         render json: blogs_to_display
-        # @current_user.blogviews.create(blog_id: blogs_to_display.pluck(:id))
-        @current_user.blogviews.create(viewed_at: Time.now, blog_id: blogs_to_display.first.id)
+        @current_user.update(blog_views_count: @current_user.blog_views_count + 1)
       end
     else
       render json: Blog.all
