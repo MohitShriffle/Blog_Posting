@@ -65,6 +65,7 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
+  config.include TokenGenerator
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:

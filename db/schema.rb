@@ -97,7 +97,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_110737) do
   create_table "subscriptions", force: :cascade do |t|
     t.date "start_date"
     t.date "end_date"
-    t.string "status"
+    t.integer "status"
     t.boolean "auto_renewal"
     t.integer "user_id", null: false
     t.integer "plan_id", null: false
