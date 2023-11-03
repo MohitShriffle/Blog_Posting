@@ -6,7 +6,7 @@ FactoryBot.define do
     end_date {Date.today + 7}
     status {'active'}
     auto_renewal { true }
-    user
-    plan
+    plan{FactoryBot.create(:plan)}
+    # user{FactoryBot.create(:user)}
   end
 end

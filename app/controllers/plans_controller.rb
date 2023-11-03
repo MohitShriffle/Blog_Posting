@@ -2,15 +2,16 @@
 
 # class PlansController
 class PlansController < ApplicationController
-  before_action :set_plan, only: %i[show update destroy]
   before_action :authenticate_user
-  load_and_authorize_resource
+  before_action :set_plan, only: %i[show update destroy]
+  # load_and_authorize_resource
   def index
-    render json: Plan.all
+    plans = Plan.all
+    render json: plans ,status: :ok
   end
 
   def show
-    render json: @plan
+    render json: @plan,status: :ok
   end
 
   def create
@@ -41,7 +42,7 @@ class PlansController < ApplicationController
   private
 
   def plan_params
-    params.require(:plan).permit(
+    params.permit(
       :name,
       :duration,
       :price,
@@ -50,6 +51,10 @@ class PlansController < ApplicationController
   end
 
   def set_plan
+    byebug
     @plan = Plan.find_by(params[:id])
+    unless @plan
+      render json: {message: "Plan Not Found"},status: 404
+    end
   end
 end

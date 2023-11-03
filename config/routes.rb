@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   post 'users/verification', to: 'users#verification'
   get 'blogs/view_blog/:id', to: 'blogs#view_blog'
   get '/blog_read', to: 'blogs#blog_read'
+  get '/show_my_blogs', to: 'blogs#show_my_blogs'
 end

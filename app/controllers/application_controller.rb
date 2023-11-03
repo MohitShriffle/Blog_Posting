@@ -33,6 +33,6 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :handle_exception
 
   def handle_exception
-    render json: { error: 'ID not found' }
+    render json: { error: 'ID not found' },status: :not_found
   end
 end

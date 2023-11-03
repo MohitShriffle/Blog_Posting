@@ -38,7 +38,9 @@ class BlogsController < ApplicationController
       end
     end
   end
-
+  def show_my_blogs
+    render json: @current_user.blogs
+  end
   def blog_read
     if @current_user.type == 'Normal'
 

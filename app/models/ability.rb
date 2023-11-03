@@ -9,7 +9,8 @@ class Ability
 
     return if user.blank?
 
-    can :read, Plan, visible: true
+    # can :read, Plan, visible: true
+    can :read, Plan
     can [:index], Plan
     can :read, Blog
     can %i[update destroy], Blog, { user: }

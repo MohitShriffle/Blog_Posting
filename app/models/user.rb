@@ -11,21 +11,21 @@ class User < ApplicationRecord
 
   has_one_attached :profile_picture
 
-  validates :email, uniqueness: true
-  validates :email, presence: true
-  validates :name, :user_name, :type, presence: true
-  validate  :validate_email
+  validates :password,format:{with: /\A
+    (?=.{6,})          # Must contain 6 or more characters
+    (?=.*\d)           # Must contain a digit
+    (?=.*[a-z])        # Must contain a lower case character
+    (?=.*[A-Z])        # Must contain an upper case character
+    (?=.*[[:^alnum:]]) # Must contain a symbol
+  /x}
 
+  validates :name, :user_name,:email, presence: true
+  validates :email, format: { with: /\A[^@\s]+@gmail\.com\z/i },uniqueness: true, unless: lambda{ email.blank? }
+  
   def can_view_blog(blog)
     return true if BlogView.where(blog:, viewed_at: 24.hours.ago..Time.now).count < 5
 
     false
-  end
-
-  def validate_email
-    return unless (email =~ /^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$/).nil?
-
-    errors.add(:email, 'please enter a valid email')
   end
 
   def reset_otp
@@ -34,6 +34,7 @@ class User < ApplicationRecord
   end
 
   def otp_valid
+    byebug
     (otp_sent_at + 4.hours) > Time.now.utc
   end
 

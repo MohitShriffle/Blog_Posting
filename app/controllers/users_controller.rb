@@ -38,8 +38,9 @@ class UsersController < ApplicationController
   end
 
   def verification
+    byebug
     otp = params[:otp].to_s
-    user = User.find_by(otp)
+    user = User.find_by(otp: otp)
     if user.present? && user.otp_valid
       if user.complete_verification
         render json: { status: 'Varification Successful' }, status: :ok

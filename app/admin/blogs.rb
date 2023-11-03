@@ -16,9 +16,11 @@ ActiveAdmin.register Blog do
   #   permitted
   # end
   index do
+    selectable_column
+    id_column
     column :title
     column :body
-    column :user_id
+    column :user
     actions
   end
   filter :title

@@ -6,28 +6,35 @@ class SubscriptionsController < ApplicationController
   before_action :authenticate_user
   load_and_authorize_resource
   def index
-    render json: @current_user.subscriptions
+    byebug
+    render json: @current_user.subscription,status: :ok
   end
 
   def show
-    render json: @subscription
+    render json: @subscription,status: :ok
   end
-
+  
   def create
-    plan = Plan.find(subscription_params[:plan_id])
-    subscription = @current_user.build_subscription(subscription_params.merge(plan_id: plan.id))
-    if subscription.save
-      render json: subscription, status: :created
+    return render json: { error: 'Please Select Your Plan ' } unless params[:plan].blank?
+    plan= Plan.find_by(params[:plan_id].to_s) 
+    if plan.present? && plan.price == params[:price].to_d
+      if plan.duration == "weekly"
+        subscription = @current_user.build_subscription(start_date: Date.today,end_date: Date.today+7,status: 'active',auto_renewal: params[:auto_renewal],plan_id: plan.id)        
+        render json: subscription ,status: :created if subscription.save
+      else
+        subscription = @current_user.build_subscription(start_date: Date.today,end_date: Date.today+30,status: 'active',auto_renewal: params[:auto_renewal],plan_id: plan.id)
+        render json: subscription,status: :created if subscription.save
+      end
     else
-      render json: { errors: subscription.errors.full_messages }, status: :unprocessable_entity
-    end
+      render json: {message: "Plan not Present in this price"},status: :unprocessable_entity
+    end 
   end
 
   def update
     if @subscription.update(subscription_params)
       render json: @subscription, status: :ok
     else
-      render json: { message: @subcription.errors.full_messages }, status: :unprocessable_entity
+      render json: { message: @subscription.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -35,14 +42,14 @@ class SubscriptionsController < ApplicationController
     if @subscription.destroy
       render json: { message: 'Subscription Deleted Succesfully' }
     else
-      @subcription.errors.full_messages
+      @subscription.errors.full_messages
     end
   end
 
   private
 
   def subscription_params
-    params.require(:subscription).permit(
+    params.permit(
       :start_date,
       :end_date,
       :auto_renewal,
@@ -53,6 +60,9 @@ class SubscriptionsController < ApplicationController
   end
 
   def get_subscription
-    Subscription.find(params[:id])
+    @subscription = Subscription.find_by(params[:id])
+    unless @subscription
+      render json: {message: "subscription Not Found"},status: 404
+    end
   end
 end
