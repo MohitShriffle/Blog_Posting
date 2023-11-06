@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
   def verification
     otp = params[:otp].to_s
-    user = User.find_by(otp: otp)
+    user = User.find_by(otp:)
     if user.present? && user.otp_valid
       if user.complete_verification
         render json: { status: 'Verification Successful' }, status: :ok
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
     if @current_user.update(user_params)
       render json: @current_user
     else
-      render json: {messages: @current_user.errors.full_messages},status: :unprocessable_entity
+      render json: { messages: @current_user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

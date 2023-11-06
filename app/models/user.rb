@@ -11,18 +11,16 @@ class User < ApplicationRecord
 
   has_one_attached :profile_picture
 
-  validates :password,format:{with: /\A
+  validates :password, format: { with: /\A
     (?=.{6,})          # Must contain 6 or more characters
     (?=.*\d)           # Must contain a digit
     (?=.*[a-z])        # Must contain a lower case character
     (?=.*[A-Z])        # Must contain an upper case character
     (?=.*[[:^alnum:]]) # Must contain a symbol
-  /x}, if: :password_required?
+  /x }, if: :password_required?
 
-
-
-  validates :name, :user_name,:email, presence: true
-  validates :email, format: { with: /\A[^@\s]+@gmail\.com\z/i },uniqueness: true, unless: lambda{ email.blank? }
+  validates :name, :user_name, :email, presence: true
+  validates :email, format: { with: /\A[^@\s]+@gmail\.com\z/i }, uniqueness: true, unless: -> { email.blank? }
 
   def can_view_blog(blog)
     return true if BlogView.where(blog:, viewed_at: 24.hours.ago..Time.now).count < 5
@@ -60,6 +58,7 @@ class User < ApplicationRecord
   def self.ransackable_associations(_auth_object = nil)
     %w[blogs blogviews plan profile_picture_attachment profile_picture_blob subscription]
   end
+
   private
 
   def password_required?

@@ -45,7 +45,6 @@ RSpec.describe PlansController, type: :controller do
       context 'with Valid Id'do
         let(:params) {{id: 2}}
         it 'Return ID Not Found'do
-        byebug
           expect(subject).to have_http_status(404)
         end
       end
@@ -58,7 +57,7 @@ RSpec.describe PlansController, type: :controller do
         end
       end
     end
-   end
+  end
 
   describe 'POST create' do
     let(:params) { {name: plan.name, duration: plan.duration, price: plan.price, active: plan.active} }
@@ -91,7 +90,6 @@ RSpec.describe PlansController, type: :controller do
     context "with vaid data" do
       it "It return ok" do
         plan.save
-        byebug
         expect(subject).to have_http_status(200)
         expect(JSON.parse(subject.body)).to eq({"id"=>1, "duration"=>"weekly", "price"=>"151.0", "active"=>true})
       end
@@ -115,7 +113,6 @@ RSpec.describe PlansController, type: :controller do
       let(:bearer_token) { '' }
       it "return unauthorized" do
         plan.save
-        byebug
         expect(subject).to have_http_status(401)
         expect(JSON.parse(subject.body)).to eq({"error"=>"Nil JSON web token"})
       end
@@ -132,7 +129,6 @@ RSpec.describe PlansController, type: :controller do
         let(:params) {{id: 0}}
         it 'Delete Plan' do
           plan.save
-          byebug
           expect(JSON.parse(subject.body)).to eq({"message"=>"Plan Not Found"})
           expect(subject).to have_http_status(404)
         end

@@ -7,11 +7,11 @@ class PlansController < ApplicationController
   # load_and_authorize_resource
   def index
     plans = Plan.all
-    render json: plans ,status: :ok
+    render json: plans, status: :ok
   end
 
   def show
-    render json: @plan,status: :ok
+    render json: @plan, status: :ok
   end
 
   def create
@@ -33,8 +33,8 @@ class PlansController < ApplicationController
 
   def destroy
     plan = @plan
-    if @plan
-      render json: { plan: plan, message: 'Plan Deleted Successfully.' }, status: :ok
+    if @plan.destroy
+      render json: { plan:, message: 'Plan Deleted Successfully.' }, status: :ok
     else
       render json: { errors: @plan.errors.full_messages }, status: :unprocessable_entity
     end
@@ -53,8 +53,8 @@ class PlansController < ApplicationController
 
   def set_plan
     @plan = Plan.find_by(id: params[:id])
-    unless @plan
-      render json: {message: "Plan Not Found"},status: 404
-    end
+    return if @plan
+
+    render json: { message: 'Plan Not Found' }, status: 404
   end
 end

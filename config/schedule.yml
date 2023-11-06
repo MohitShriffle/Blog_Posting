@@ -1,25 +1,25 @@
-:schedule:
-  expiration_notification_job:
-    cron: "* * * * *"
-    class: "ExpirationNotificationJob"
-    queue: "default"
+update_subscription_status_scheduler:
+  cron: '0 0 * * *'
+  class: 'UpdateSubscriptionStatusScheduler'
+  queue: 'default'
 
-  expiration_notification_job:
-    cron: '0 0 * * *'
-    class: 'SubscriptionExpirationJob'
-    queue: 'default'
+# subscription_renewal_job:
+#   cron: '0 0 * * *'   
+#   class: 'SubscriptionRenewalJob'
+#   queue: 'default'
+  
+reset_blog_view_sheduler:
+  cron: '0 0 * * *'
+  class: 'ResetBlogViewScheduler'
+  queue: 'default'
 
-  subscription_renewal_job:
-    cron: '0 0 * * *'   
-    class: 'SubscriptionRenewalJob'
-    queue: 'default'
-   
-  resetblogview_job:
-    cron: '* 0 * * *'
-    class: 'ResetblogviewJob'
-    queue: 'default'
+subscription_expiration_scheduler:
+  cron: '0 0 * * *'
+  class: 'SubscriptionExpirationScheduler'
+  queue: 'default'
 
-  reset_user_blog_views_job:
-    cron: '1 1 * * *'
-    class: 'ResetUserBlogViewsJob'
-    queue: 'default'
+expiration_notification_scheduler:
+  cron: '0 0 * * *'
+  class: 'ExpirationNotificationScheduler'
+  queue: 'default'
+

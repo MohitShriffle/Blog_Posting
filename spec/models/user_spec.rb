@@ -21,7 +21,7 @@ RSpec.describe User, type: :model do
   end
 
   it 'is not valid without a valid email' do
-    @user.email = @user.validate_email
+    @user.email = nil
     expect(@user).to_not be_valid
   end
 

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-# class SubscriptionExpirationJob
-class SubscriptionExpirationJob < ApplicationJob
-  queue_as :default
+# class SubscriptionExpirationScheduler
+class SubscriptionExpirationScheduler
+  include Sidekiq::Worker
   def perform
     expired_subscriptions = Subscription.where('end_date < ?', Date.today)
     expired_subscriptions.update_all(status: 'expired')

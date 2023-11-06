@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
     ActiveStorage::Current.url_options = { host: request.base_url }
   end
 
-
   rescue_from CanCan::AccessDenied do |_exception|
     render json: 'Access Denied', status: :unauthorized
   end
@@ -34,6 +33,6 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :handle_exception
 
   def handle_exception
-    render json: { error: 'ID not found' },status: :not_found
+    render json: { error: 'ID not found' }, status: :not_found
   end
 end

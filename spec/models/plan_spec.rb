@@ -33,7 +33,6 @@ RSpec.describe Plan, type: :model do
   end
 
   it 'should have many subscriptions' do
-    byebug
     t = Plan.reflect_on_association(:subscriptions)
     expect(t.macro).to eq(:has_many)
   end

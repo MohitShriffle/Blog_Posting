@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-# class ResetblogviewJob
-class ResetblogviewJob < ApplicationJob
-  queue_as :default
-
+# class ResetBlogViewScheduler
+class ResetBlogViewScheduler
+  include Sidekiq::Worker
   def perform
     b = BlogView.all
     b.destroy_all

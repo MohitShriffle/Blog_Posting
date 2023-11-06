@@ -18,7 +18,6 @@ class UserControllerTest < ActionDispatch::IntegrationTest
     context 'without token' do
       let(:bearer_token) { '' }
       it 'return unauthorized' do
-        byebug
         expect(subject).to have_http_status(401)
         expect(JSON.parse(subject.body)).to eq({ 'error' => 'Nil JSON web token' })
       end

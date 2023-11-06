@@ -7,6 +7,6 @@ FactoryBot.define do
     status {'active'}
     auto_renewal { true }
     plan{FactoryBot.create(:plan)}
-    # user{FactoryBot.create(:user)}
+    user{FactoryBot.create(:user)}
   end
 end
