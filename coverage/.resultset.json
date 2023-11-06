@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/controllers/application_controller.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/controllers/application_controller.rb": {
         "lines": [
           null,
           null,
@@ -13,26 +13,27 @@
           1,
           null,
           1,
-          0,
+          12,
           null,
           null,
-          1,
-          0,
-          null,
-          null,
-          1,
           null,
           1,
           0,
           null,
+          null,
+          1,
+          null,
+          1,
+          4,
+          null,
+          4,
+          null,
+          4,
+          3,
+          1,
           0,
           null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
+          1,
           null,
           null,
           1,
@@ -43,7 +44,7 @@
           null
         ]
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/helpers/application_helper.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/helpers/application_helper.rb": {
         "lines": [
           null,
           null,
@@ -52,7 +53,7 @@
           null
         ]
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/controllers/concerns/jwt_token.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/controllers/concerns/jwt_token.rb": {
         "lines": [
           null,
           null,
@@ -64,18 +65,18 @@
           1,
           null,
           1,
-          0,
-          0,
+          6,
+          6,
           null,
           null,
           1,
-          0,
-          0,
+          4,
+          3,
           null,
           null
         ]
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/models/admin_user.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/models/admin_user.rb": {
         "lines": [
           null,
           null,
@@ -87,234 +88,74 @@
           null,
           1,
           0,
-          null,
-          null,
-          null
-        ]
-      },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/models/application_record.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/admin/admin_users.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null
-        ]
-      },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/admin/blog_views.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          0,
-          0,
-          null,
-          1,
-          1,
-          1,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          1,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          1,
-          null
-        ]
-      },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/models/blog_view.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          0,
-          null,
-          null
-        ]
-      },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/admin/blogs.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          1,
-          1,
-          1,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          1,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null
-        ]
-      },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/models/blog.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null
-        ]
-      },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/admin/dashboard.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           null,
           null,
           null
         ]
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/admin/plans.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/models/application_record.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/admin/admin_users.rb": {
         "lines": [
           null,
           null,
           1,
           1,
+          null,
+          1,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null
+        ]
+      },
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/admin/blog_views.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
           0,
           0,
           0,
@@ -327,12 +168,10 @@
           0,
           0,
           0,
-          0,
           null,
           0,
           null,
           1,
-          0,
           0,
           0,
           0,
@@ -343,7 +182,7 @@
           null
         ]
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/models/plan.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/models/blog_view.rb": {
         "lines": [
           null,
           null,
@@ -352,8 +191,75 @@
           1,
           1,
           1,
+          0,
+          null,
+          null
+        ]
+      },
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/admin/blogs.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
           1,
           1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/models/blog.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
           1,
           0,
           null,
@@ -364,7 +270,45 @@
           null
         ]
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/admin/subscriptions.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/admin/dashboard.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/admin/plans.rb": {
         "lines": [
           null,
           null,
@@ -376,15 +320,10 @@
           0,
           0,
           0,
-          0,
           null,
           1,
           1,
           1,
-          1,
-          1,
-          0,
-          0,
           0,
           0,
           0,
@@ -394,8 +333,6 @@
           0,
           null,
           1,
-          0,
-          0,
           0,
           0,
           0,
@@ -407,7 +344,7 @@
           null
         ]
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/models/subscription.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/models/plan.rb": {
         "lines": [
           null,
           null,
@@ -418,9 +355,7 @@
           1,
           1,
           1,
-          0,
-          null,
-          0,
+          1,
           0,
           null,
           null,
@@ -430,7 +365,74 @@
           null
         ]
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/admin/users.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/admin/subscriptions.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/models/subscription.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/admin/users.rb": {
         "lines": [
           null,
           null,
@@ -493,7 +495,7 @@
           null
         ]
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/models/user.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/models/user.rb": {
         "lines": [
           null,
           null,
@@ -513,125 +515,137 @@
           null,
           null,
           null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          35,
+          null,
+          1,
+          0,
+          null,
+          0,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          1,
+          null,
+          1,
+          17,
+          null,
+          null
+        ]
+      },
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/controllers/users_controller.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          2,
+          2,
+          null,
+          1,
+          null,
+          1,
           null,
           null,
           null,
           1,
           3,
           null,
+          2,
+          2,
           1,
-          0,
-          null,
-          0,
-          null,
-          null,
           1,
-          0,
-          0,
-          null,
+          1,
           null,
           1,
-          0,
-          0,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
           null,
           null,
           null,
           1,
+          3,
+          3,
+          3,
+          1,
+          1,
+          null,
           0,
           null,
-          null
-        ]
-      },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/controllers/subscriptions_controller.rb": {
-        "lines": [
+          null,
+          2,
           null,
           null,
           null,
           1,
+          2,
           1,
-          1,
-          1,
-          1,
-          0,
-          0,
-          null,
           null,
           1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          null,
-          0,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          0,
           null,
           null,
           null,
           1,
           null,
           1,
-          0,
+          4,
           null,
           null,
           null,
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          0,
           null,
           null,
           null
         ]
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/models/normal.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/models/normal.rb": {
         "lines": [
           null,
           null,
@@ -640,45 +654,55 @@
           null
         ]
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/models/ability.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/serializers/user_serializer.rb": {
         "lines": [
           null,
           null,
           null,
+          1,
+          1,
+          null,
+          1,
+          3,
+          null,
+          null
+        ]
+      },
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/mailers/user_mailer.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
           0,
           0,
           null,
-          0,
-          0,
           null,
-          0,
+          1,
+          1,
+          1,
           null,
           null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
+          1,
           0,
           0,
           null,
           null
         ]
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/serializers/subscription_serializer.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/mailers/application_mailer.rb": {
         "lines": [
           null,
           null,
           null,
-          0,
-          0,
+          1,
+          1,
+          1,
           null
         ]
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/channels/application_cable/channel.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/channels/application_cable/channel.rb": {
         "lines": [
           null,
           null,
@@ -690,7 +714,7 @@
         "branches": {
         }
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/channels/application_cable/connection.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/channels/application_cable/connection.rb": {
         "lines": [
           null,
           null,
@@ -702,32 +726,7 @@
         "branches": {
         }
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/controllers/authentication_controller.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/controllers/blogs_controller.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/controllers/authentication_controller.rb": {
         "lines": [
           null,
           null,
@@ -747,6 +746,31 @@
           0,
           0,
           0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/controllers/blogs_controller.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           null,
@@ -846,7 +870,7 @@
         "branches": {
         }
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/controllers/plans_controller.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/controllers/plans_controller.rb": {
         "lines": [
           null,
           null,
@@ -888,10 +912,11 @@
           0,
           0,
           0,
-          null,
           0,
           null,
           0,
+          null,
+          0,
           0,
           0,
           0,
@@ -900,7 +925,6 @@
           0,
           0,
           null,
-          0,
           0,
           0,
           0,
@@ -912,41 +936,13 @@
         "branches": {
         }
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/controllers/users_controller.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/controllers/subscriptions_controller.rb": {
         "lines": [
           null,
           null,
           null,
           0,
           0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
           0,
           0,
           0,
@@ -956,13 +952,29 @@
           0,
           0,
           0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          0,
+          null,
           0,
           0,
           0,
-          0,
-          0,
-          0,
-          0,
+          null,
           0,
           0,
           0,
@@ -975,6 +987,31 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           null,
           0,
           null,
@@ -982,6 +1019,13 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
           0,
           0,
           0,
@@ -993,7 +1037,7 @@
         "branches": {
         }
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/jobs/application_job.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/jobs/application_job.rb": {
         "lines": [
           null,
           null,
@@ -1009,43 +1053,7 @@
         "branches": {
         }
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/jobs/auto_renewal_job.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/jobs/expiration_notification_job.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/jobs/reset_user_blog_views_job.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/jobs/auto_renewal_job.rb": {
         "lines": [
           null,
           null,
@@ -1062,7 +1070,26 @@
         "branches": {
         }
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/jobs/resetblogview_job.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/jobs/expiration_notification_job.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/jobs/reset_user_blog_views_job.rb": {
         "lines": [
           null,
           null,
@@ -1079,7 +1106,24 @@
         "branches": {
         }
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/jobs/subscription_expiration_job.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/jobs/resetblogview_job.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/jobs/subscription_expiration_job.rb": {
         "lines": [
           null,
           null,
@@ -1095,7 +1139,7 @@
         "branches": {
         }
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/jobs/update_subscription_status_job.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/jobs/update_subscription_status_job.rb": {
         "lines": [
           0,
           0,
@@ -1109,22 +1153,18 @@
         "branches": {
         }
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/mailers/application_mailer.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/models/ability.rb": {
         "lines": [
           null,
           null,
           null,
           0,
           0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/mailers/user_mailer.rb": {
-        "lines": [
           null,
+          0,
+          0,
+          null,
+          0,
           null,
           null,
           0,
@@ -1132,12 +1172,8 @@
           0,
           0,
           0,
-          null,
           0,
           0,
-          0,
-          0,
-          null,
           0,
           0,
           0,
@@ -1147,7 +1183,7 @@
         "branches": {
         }
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/models/premium.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/models/premium.rb": {
         "lines": [
           null,
           null,
@@ -1158,7 +1194,7 @@
         "branches": {
         }
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/serializers/blog_serializer.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/serializers/blog_serializer.rb": {
         "lines": [
           null,
           null,
@@ -1170,7 +1206,7 @@
         "branches": {
         }
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/serializers/plan_serializer.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/serializers/plan_serializer.rb": {
         "lines": [
           null,
           null,
@@ -1182,15 +1218,11 @@
         "branches": {
         }
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/serializers/user_serializer.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/serializers/subscription_serializer.rb": {
         "lines": [
           null,
           null,
           null,
-          0,
-          0,
-          null,
-          0,
           0,
           0,
           0
@@ -1198,7 +1230,7 @@
         "branches": {
         }
       },
-      "/home/hp/Desktop/Mohit_rails/Blog_Posting_Active_Admin/app/workers/post_publish_scheduler.rb": {
+      "C:/Users/nice/Desktop/Rails_Projects/Blog_Posting/app/workers/post_publish_scheduler.rb": {
         "lines": [
           null,
           null,
@@ -1219,6 +1251,6 @@
         }
       }
     },
-    "timestamp": 1699019922
+    "timestamp": 1699187871
   }
 }

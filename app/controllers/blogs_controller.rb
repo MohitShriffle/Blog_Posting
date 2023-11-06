@@ -11,7 +11,7 @@ class BlogsController < ApplicationController
       response = HTTParty.get('https://jsonplaceholder.typicode.com/posts')
       blogs1.concat(JSON.parse(response.body))
       blogs1.concat(Blog.all)
-      render json: blogs1.page(params[:page])
+      render json: blogs1
     else
       blogs = Blog.all
       blogs1 = blogs.page(params[:page])

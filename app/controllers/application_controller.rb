@@ -8,8 +8,9 @@ class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
 
   before_action do
-    ActiveStorage::Current.host = request.base_url
+    ActiveStorage::Current.url_options = { host: request.base_url }
   end
+
 
   rescue_from CanCan::AccessDenied do |_exception|
     render json: 'Access Denied', status: :unauthorized

@@ -4,9 +4,10 @@ RSpec.describe PlansController, type: :controller do
   let(:user) { FactoryBot.create(:user) }
   let(:plan) { FactoryBot.build(:plan) }
   let(:bearer_token) { jwt_token_1(user) }
-  
-  
+
+
   describe "GET /plans" do
+
     subject do
       request.headers[:token] = bearer_token
       # request.headers["Authorization"] = bearer_token
@@ -34,33 +35,33 @@ RSpec.describe PlansController, type: :controller do
       end
     end
   end
-  
+
   describe 'GET show' do
     subject do
       request.headers[:token] = bearer_token
       get :show, params: params
     end
-    context 'Get Plan 'do 
+    context 'Get Plan 'do
       context 'with Valid Id'do
         let(:params) {{id: 2}}
         it 'Return ID Not Found'do
         byebug
-          expect(subject).to have_http_status(404)  
+          expect(subject).to have_http_status(404)
         end
-      end 
-      context 'with invalid Id'do 
+      end
+      context 'with invalid Id'do
         let(:params) {{id: plan.id}}
         it 'return a plan' do
           plan.save
-          expect(subject).to have_http_status(200)  
+          expect(subject).to have_http_status(200)
           expect(JSON.parse(subject.body)).to eq({"id"=>1, "duration"=>"weekly", "price"=>"150.0", "active"=>true})
         end
       end
     end
    end
-  
+
   describe 'POST create' do
-    let(:params) { {name: plan.name, duration: plan.duration, price: plan.price, active: plan.active} } 
+    let(:params) { {name: plan.name, duration: plan.duration, price: plan.price, active: plan.active} }
     subject do
       request.headers[:token] = bearer_token
       post :create, params: params
@@ -82,7 +83,7 @@ RSpec.describe PlansController, type: :controller do
   end
 
   describe 'PATCH Update' do
-    let(:params) { {id: plan.id, price: 151} }   
+    let(:params) { {id: plan.id, price: 151} }
     subject do
       request.headers[:token] = bearer_token
       patch :update, params: params
@@ -96,16 +97,16 @@ RSpec.describe PlansController, type: :controller do
       end
     end
     context "with invalid params" do
-      let(:params) {   {id: plan.id, price: ""} } 
+      let(:params) {   {id: plan.id, price: ""} }
       it "it not valid params" do
-        plan.save 
+        plan.save
         expect(subject).to have_http_status(422)
       end
     end
   end
-  
+
   describe 'DELETE #destroy' do
-    let(:params) {{id: plan.id}}  
+    let(:params) {{id: plan.id}}
     subject do
       request.headers[:token] = bearer_token
       delete :destroy, params: params
@@ -114,7 +115,7 @@ RSpec.describe PlansController, type: :controller do
       let(:bearer_token) { '' }
       it "return unauthorized" do
         plan.save
-        byebug 
+        byebug
         expect(subject).to have_http_status(401)
         expect(JSON.parse(subject.body)).to eq({"error"=>"Nil JSON web token"})
       end
@@ -124,7 +125,7 @@ RSpec.describe PlansController, type: :controller do
         it 'Delete Plan' do
           plan.save
           expect { subject}.to change(Plan, :count).from(1).to(0)
-          expect(subject).to have_http_status(204)
+          expect(subject).to have_http_status(200)
         end
       end
       context 'with invalid id' do

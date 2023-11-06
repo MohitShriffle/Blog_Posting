@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
-      UserMailer.with(user:).welcome_email.deliver_now
+      # UserMailer.with(user:).welcome_email.deliver_now
       render json: user, status: :created
     else
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
@@ -38,17 +38,16 @@ class UsersController < ApplicationController
   end
 
   def verification
-    byebug
     otp = params[:otp].to_s
     user = User.find_by(otp: otp)
     if user.present? && user.otp_valid
       if user.complete_verification
-        render json: { status: 'Varification Successful' }, status: :ok
+        render json: { status: 'Verification Successful' }, status: :ok
       else
         render json: { error: user.errors.full_messages }, status: :unprocessable_entity
       end
     else
-      render json: { error: ['Link not valid or expired. Try generating a new link.'] }, status: :not_found
+      render json: { error: ['Link not valid or expired. Try generating a new link.'] }, status: :unprocessable_entity
     end
   end
 
@@ -56,7 +55,7 @@ class UsersController < ApplicationController
     if @current_user.update(user_params)
       render json: @current_user
     else
-      render json: @current_user.errors.full_messages
+      render json: {messages: @current_user.errors.full_messages},status: :unprocessable_entity
     end
   end
 

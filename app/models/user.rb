@@ -17,11 +17,13 @@ class User < ApplicationRecord
     (?=.*[a-z])        # Must contain a lower case character
     (?=.*[A-Z])        # Must contain an upper case character
     (?=.*[[:^alnum:]]) # Must contain a symbol
-  /x}
+  /x}, if: :password_required?
+
+
 
   validates :name, :user_name,:email, presence: true
   validates :email, format: { with: /\A[^@\s]+@gmail\.com\z/i },uniqueness: true, unless: lambda{ email.blank? }
-  
+
   def can_view_blog(blog)
     return true if BlogView.where(blog:, viewed_at: 24.hours.ago..Time.now).count < 5
 
@@ -34,7 +36,6 @@ class User < ApplicationRecord
   end
 
   def otp_valid
-    byebug
     (otp_sent_at + 4.hours) > Time.now.utc
   end
 
@@ -58,5 +59,10 @@ class User < ApplicationRecord
 
   def self.ransackable_associations(_auth_object = nil)
     %w[blogs blogviews plan profile_picture_attachment profile_picture_blob subscription]
+  end
+  private
+
+  def password_required?
+    new_record? || changes[:password].present?
   end
 end

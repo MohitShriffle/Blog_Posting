@@ -32,8 +32,9 @@ class PlansController < ApplicationController
   end
 
   def destroy
-    if @plan.destroy
-      render json: { message: 'Plan Deleted Succesfully' }, status: :no_content
+    plan = @plan
+    if @plan
+      render json: { plan: plan, message: 'Plan Deleted Successfully.' }, status: :ok
     else
       render json: { errors: @plan.errors.full_messages }, status: :unprocessable_entity
     end
@@ -51,8 +52,7 @@ class PlansController < ApplicationController
   end
 
   def set_plan
-    byebug
-    @plan = Plan.find_by(params[:id])
+    @plan = Plan.find_by(id: params[:id])
     unless @plan
       render json: {message: "Plan Not Found"},status: 404
     end
