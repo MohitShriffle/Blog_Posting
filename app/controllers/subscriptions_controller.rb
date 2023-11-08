@@ -2,7 +2,8 @@
 
 # class SubscriptionsController
 class SubscriptionsController < ApplicationController
-  before_action :get_subscription, only: %i[show update destroy]
+  before_action :set_subscription, only: %i[show update destroy]
+  before_action :set_plan, only: :create
   before_action :authenticate_user
   load_and_authorize_resource
   def index
@@ -14,29 +15,17 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
-    plan = Plan.find_by(id: params[:plan_id].to_s)
-
-    if plan.nil? || plan.price != params[:price].to_d
-      return render json: { message: 'Plan not present for this price' }, status: :unprocessable_entity
-    end
-
-    auto_renewal = params[:auto_renewal] == 'true'
-    unless [true, false].include?(auto_renewal)
-      return render json: { errors: 'Invalid value for auto_renewal' }, status: :unprocessable_entity
-    end
-
-    duration = plan.duration == 'weekly' ? 7 : 30
-    subscription = @current_user.build_subscription(
-      start_date: Date.today,
-      end_date: Date.today + duration,
-      status: 'active',
-      auto_renewal:,
-      plan:
-    )
-    if subscription.save
-      render json: subscription, status: :created
-    else
-      render json: { errors: subscription.errors.full_messages }, status: :unprocessable_entity
+    if check_valid_attributes == true
+      duration = { weekly: 7, monthly: 30 }
+      subscription = Subscription.new(
+        start_date: Date.today,
+        end_date: Date.today + duration[@plan.duration.parameterize.underscore.to_sym],
+        status: 'active',
+        auto_renewal: params[:auto_renewal],
+        plan: @plan,
+        user: @current_user
+      )
+      render json: subscription, status: 201 if subscription.save
     end
   end
 
@@ -50,7 +39,7 @@ class SubscriptionsController < ApplicationController
 
   def destroy
     if @subscription.destroy
-      render json: { message: 'Subscription Deleted Succesfully' }, status: 204
+      render json: { message: 'Subscription Deleted Succesfully' }, status: 200
     else
       render json: { errors: @subscription.errors.full_messages }, status: 422
     end
@@ -69,10 +58,20 @@ class SubscriptionsController < ApplicationController
     )
   end
 
-  def get_subscription
-    @subscription = Subscription.find_by(params[:id])
-    return if @subscription
+  def check_valid_attributes
+    if (@plan.price == params[:price].to_d) && [true, false].include?(params[:auto_renewal] == 'true')
+      true
+    else
+      render json: { message: 'Plan not present for this price and please give valid auto renewal' },
+             status: 422
+    end
+  end
 
-    render json: { message: 'subscription Not Found' }, status: 404
+  def set_plan
+    render json: { message: 'Plan Not Found' },status: 404 unless (@plan = Plan.find_by(id: params[:plan_id].to_s))
+  end
+
+  def set_subscription
+    return render json: { message: 'subscription Not Found' },status: 404 unless (@subscription = Subscription.find_by(id: params[:id]))
   end
 end

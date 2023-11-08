@@ -23,32 +23,12 @@ RSpec.describe UsersController, type: :controller do
         it 'returns all the users' do
           user.save
           expect(subject).to have_http_status(200)
+          expect(JSON.parse(subject.body)).to eq([{"id"=>1, "name"=>user.name, "user_name"=>user.user_name, "email"=>user.email, "type"=>user.type, "profile_picture_url"=>nil}])
         end
       end
     end
   end
-
-  # describe "GET show" do
-  #   let(:params){{user_id: user.id}}
-  #   subject do
-  #     request.headers[:token]= bearer_token
-  #     get :show
-  #   end
-  #   context 'without token' do
-  #     let(:bearer_token){ '' }
-  #     it 'return unauthorized' do
-  #       expect(subject).to have_http_status(401)
-  #       except(JSON.parse(subject.body)).to eq({"error" =>"Nil JSON web token"})
-  #     end
-  #   end
-  #   context 'with token' do
-
-  #      it 'returns user' do
-  #       expect(subject).to have_http_status(200)
-  #     end
-  #   end
-  # end
-
+  
   describe 'POST create' do
     let(:params) {{name: user.name,user_name: user.user_name,email: user.email,password:user.password,type: "Normal"}}
     subject do
@@ -68,6 +48,12 @@ RSpec.describe UsersController, type: :controller do
           expect(subject).to have_http_status(422)
         end
       end
+      # context "with a valid image" do      
+      #   it "saves the image" do
+      #     saved_file = user.profile_picture.attach(io: File.open("/home/hp/Downloads/mohit.jpeg"), filename: "mohit.jpeg")
+      #     expect(saved_file).to be_an_instance_of(ActiveStorage::Attachment::Blob)
+      #   end
+      # end
     end
   end
 
@@ -82,6 +68,7 @@ RSpec.describe UsersController, type: :controller do
         it 'send mail'do
           user.save
           expect(subject).to have_http_status(200)
+          expect(JSON.parse(subject.body)).to eq({"status"=>"Otp Send Succesfully"})
         end
       end
       context 'with invalidvalid email'do
@@ -89,13 +76,15 @@ RSpec.describe UsersController, type: :controller do
         it 'Email address not found. Please check and try again.'do
           user.save
           expect(subject).to have_http_status(404)
+          expect(JSON.parse(subject.body)).to eq({"error"=>["Email address not found. Please check and try again."]})
         end
       end
       context 'with invalid email'do
         let(:params) {{email: ""}}
         it 'Email not present' do
           user.save
-          expect(JSON.parse(subject.body)).to eq({"error"=>"Email not present"})
+          expect(subject).to have_http_status(404)
+          expect(JSON.parse(subject.body)).to eq({"error"=>["Email address not found. Please check and try again."]})
         end
       end
     end
@@ -128,11 +117,12 @@ RSpec.describe UsersController, type: :controller do
       let(:params) { { otp: '123678' } }
       it 'returns an error' do
         get :verification, params: params
-        expect(response).to have_http_status(422)
-        expect(JSON.parse(response.body)).to include('error' => ['Link not valid or expired. Try generating a new link.'])
+        expect(response).to have_http_status(404)
+        expect(JSON.parse(response.body)).to include({"error"=>["User not present for this otp"]})
       end
     end
   end
+  
   describe 'PATCH Update' do
     let(:params) {{id: user.id, name: "mohit"}}
     subject do

@@ -1,25 +1,25 @@
-update_subscription_status_scheduler:
+auto_renewal_worker:
   cron: '0 0 * * *'
-  class: 'UpdateSubscriptionStatusScheduler'
+  class: 'AutoRenewalWorker'
   queue: 'default'
 
-# subscription_renewal_job:
-#   cron: '0 0 * * *'   
-#   class: 'SubscriptionRenewalJob'
-#   queue: 'default'
+expiration_notification_worker:
+  cron: '0 0 * * *'   
+  class: 'ExpirationNotificationWorker'
+  queue: 'default'
   
-reset_blog_view_sheduler:
+reset_user_blog_views_worker:
   cron: '0 0 * * *'
-  class: 'ResetBlogViewScheduler'
+  class: 'ResetBlogViewWorker'
   queue: 'default'
 
-subscription_expiration_scheduler:
+reset_blog_views_count_worker:
   cron: '0 0 * * *'
-  class: 'SubscriptionExpirationScheduler'
+  class: 'ResetBlogViewsCountWorker'
   queue: 'default'
 
-expiration_notification_scheduler:
+update_subscription_status_worker:
   cron: '0 0 * * *'
-  class: 'ExpirationNotificationScheduler'
+  class: 'UpdateSubscriptionStatusWorker'
   queue: 'default'
 

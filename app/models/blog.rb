@@ -3,7 +3,7 @@
 # blog class
 class Blog < ApplicationRecord
   belongs_to :user
-  has_many :blogviews, dependent: :destroy, class_name: 'BlogView'
+  has_many :blog_views, dependent: :destroy, class_name: 'BlogView'
 
   validates :title, :body, presence: true
 

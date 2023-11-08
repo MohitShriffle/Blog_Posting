@@ -41,7 +41,7 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = false
-
+  # config.warn_when_jobs_not_processed_by_sidekiq = true # default => true
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 

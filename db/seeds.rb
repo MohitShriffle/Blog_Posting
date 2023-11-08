@@ -8,7 +8,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 # AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
-  Plan.create( name: "Basic",duration: "weekly",price: 150,active: true )
+  # Plan.create( name: "Basic",duration: "weekly",price: 150,active: true )
 
-  Plan.create( name: "Premium",duration: "monthly",price: 500,active: true)
+  # Plan.create( name: "Premium",duration: "monthly",price: 500,active: true)
   

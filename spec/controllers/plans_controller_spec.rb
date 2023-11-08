@@ -12,6 +12,7 @@ RSpec.describe PlansController, type: :controller do
       request.headers[:token] = bearer_token
       # request.headers["Authorization"] = bearer_token
       get 'index'
+
     end
     context 'without token' do
       let(:bearer_token) { '' }
@@ -99,6 +100,14 @@ RSpec.describe PlansController, type: :controller do
       it "it not valid params" do
         plan.save
         expect(subject).to have_http_status(422)
+      end
+    end
+    context 'with invalid id' do
+      let(:params) {{id: 0}}
+      it 'Update Plan' do
+        plan.save
+        expect(JSON.parse(subject.body)).to eq({"message"=>"Plan Not Found"})
+        expect(subject).to have_http_status(404)
       end
     end
   end

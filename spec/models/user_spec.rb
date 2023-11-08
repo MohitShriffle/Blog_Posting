@@ -48,11 +48,11 @@ RSpec.describe User, type: :model do
     t = User.reflect_on_association(:subscription)
     expect(t.macro).to eq(:has_one)
   end
-  it 'should have blogviews' do
-    t = User.reflect_on_association(:blogviews)
+  it 'should have blog_views' do
+    t = User.reflect_on_association(:blog_views)
     expect(t.macro).to eq(:has_many)
   end
-  it 'should have blogviews' do
+  it 'should have blog_views' do
     t = User.reflect_on_association(:plan)
     expect(t.macro).to eq(:belongs_to)
   end

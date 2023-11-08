@@ -12,31 +12,23 @@ class BlogsController < ApplicationController
       response = HTTParty.get('https://jsonplaceholder.typicode.com/posts')
       blogs1.concat(JSON.parse(response.body))
       blogs1.concat(Blog.all)
-      render json: blogs1, status: :ok
     else
       blogs = Blog.all
       blogs1 = blogs.page(params[:page])
-      render json: blogs1, status: :ok
     end
+    render json: blogs1, status: :ok
   end
 
   def show
-    if @current_user.type == 'Premium' || @blog.user == @current_user
+    return render json: @blog, status: :ok if @current_user.type == 'Premium' || @blog.user == @current_user
+
+    if @current_user.can_view_blog(@blog)
       render json: @blog, status: :ok
+      BlogView.create(user_id: @current_user.id, blog_id: @blog.id, viewed_at: Time.now)
     else
-      user = @current_user
-      if user.can_view_blog(@blog)
-        render json: @blog, status: :ok
-        BlogView.create(user_id: @current_user.id, blog_id: @blog.id, viewed_at: Time.now)
-      else
-        limited_blog = {
-          title: @blog.title,
-          author: @blog.user.name,
-          content: 'Content is restricted due to daily view limit.',
-          message: 'You have reached the maximum limit To show .'
-        }
-        render json: limited_blog, status: :ok
-      end
+      limited_blog = { title: @blog.title, author: @blog.user.name,
+                       message: 'You have reached the maximum limit To show' }
+      render json: limited_blog, status: :ok
     end
   end
 
@@ -45,18 +37,15 @@ class BlogsController < ApplicationController
   end
 
   def blog_read
-    if @current_user.type == 'Normal'
+    return render json: Blog.all, status: :ok unless @current_user.type == 'Normal'
 
-      if @current_user.blog_views_count >= 5
-        limited_blogs = Blog.where.not(user_id: @current_user.id).limit(5)
-        render json: limited_blogs.map { |blog| { blog_id: blog.id, title: blog.title, author: blog.user.name } }
-      else
-        blogs_to_display = Blog.where.not(user_id: @current_user.id).sample(5)
-        @current_user.update(blog_views_count: @current_user.blog_views_count + 1)
-        render json: blogs_to_display, status: :ok
-      end
+    if @current_user.blog_views_count >= 5
+      limited_blogs = Blog.where.not(user_id: @current_user.id).limit(5)
+      render json: limited_blogs.map { |blog| { blog_id: blog.id, title: blog.title, author: blog.user.name } }
     else
-      render json: Blog.all, status: :ok
+      blogs_to_display = Blog.where.not(user_id: @current_user.id).sample(5)
+      @current_user.update(blog_views_count: @current_user.blog_views_count + 1)
+      render json: blogs_to_display, status: :ok
     end
   end
 
@@ -70,7 +59,10 @@ class BlogsController < ApplicationController
   end
 
   def update
-    return unless check_can_update?
+    unless check_can_update
+      return render json: { errors: 'You have reached the maximum allowed modifications for this post.' },
+                    status: :forbidden
+    end
 
     if @blog.update(blog_params)
       render json: @blog, status: :ok
@@ -80,24 +72,14 @@ class BlogsController < ApplicationController
     end
   end
 
-  def check_can_update?
-    if @current_user.type == 'Premium'
-      return true
-    elsif @blog.user == @current_user && @blog.modifications_count < 2
-      return true
-    else
-      render json: { errors: 'You have reached the maximum allowed modifications for this post.' }, status: :forbidden
-    end
+  def check_can_update
+    return true if (@current_user.type == 'Premium') || (@blog.user == @current_user && @blog.modifications_count < 2)
 
     false
   end
 
   def destroy
-    if @blog.destroy
-      render json: { errors: 'Blog Deleted succesfully' }
-    else
-      render json: { errors: @blog.errors.full_messages }, status: :not_found
-    end
+    render json: { errors: 'Blog Deleted succesfully' } if @blog.destroy
   end
 
   private
@@ -111,9 +93,6 @@ class BlogsController < ApplicationController
   end
 
   def set_blog
-    @blog = Blog.find_by(id: params[:id])
-    return if @blog
-
-    render json: { message: 'Blog Not Found' }, status: 404
+    render json: { message: 'Blog Not Found' }, status: 404 unless (@blog = Blog.find_by(id: params[:id]))
   end
 end

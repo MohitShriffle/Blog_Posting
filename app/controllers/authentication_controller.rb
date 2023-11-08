@@ -4,17 +4,12 @@
 class AuthenticationController < ApplicationController
   include JwtToken
   def login
-    if @user = User.find_by(email: params[:email])
-      if @user.verified != false
-        if @user&.authenticate(params[:password])
-          token = jwt_encode({ user_id: @user.id })
-          render json: { token: }, status: :ok
-        else
-          render json: { error: 'Unauthorized' }, status: :unauthorized
-        end
-      else
-        render json: { message: 'You need to Verify Your Email' }, status: :unprocessable_entity
-      end
+    user = User.find_by(email: params[:email])
+    if user&.authenticate(params[:password])
+      return render json: { message: 'You need to Verify Your Email' }, status: 422 unless user.verified != false
+
+      token = jwt_encode({ user_id: user.id })
+      render json: { message: 'Login Succesfull', token: }, status: :ok
     else
       render json: { error: 'Unauthorized' }, status: :unauthorized
     end

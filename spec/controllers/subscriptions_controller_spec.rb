@@ -112,15 +112,15 @@ RSpec.describe SubscriptionsController, type: :controller do
         context 'with invalid plan_id' do
           let(:params) {  {plan_id: 23, price: 150, auto_renewal: true  }}
           it 'returns unprocessebleentity' do
-            expect(subject).to have_http_status(422)
-            expect(JSON.parse(subject.body)).to eq({"message"=>"Plan not present for this price"})
+            expect(subject).to have_http_status(404)
+            expect(JSON.parse(subject.body)).to eq({"message"=>"Plan Not Found"})
           end
         end
         context 'with invalid price' do
           let(:params) { {plan_id: subscription.plan_id,price: 152,auto_renewal: true }}
           it 'returns unprocessebleentity' do
             expect(subject).to have_http_status(422)
-            expect(JSON.parse(subject.body)).to eq({"message"=>"Plan not present for this price"})
+            expect(JSON.parse(subject.body)).to eq({"message"=>"Plan not present for this price and please give valid auto renewal"})
           end
         end
       end
@@ -147,7 +147,7 @@ RSpec.describe SubscriptionsController, type: :controller do
         it 'Delete Subscription' do
           subscription.save
           expect { subject}.to change(Subscription, :count).from(1).to(0)
-          expect(subject).to have_http_status(204)
+          expect(subject).to have_http_status(200)
         end
       end
       context 'with invalid id' do

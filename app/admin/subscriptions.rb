@@ -14,6 +14,7 @@ ActiveAdmin.register Subscription do
   filter :end_date
   filter :status
   filter :auto_renewal
+
   form do |f|
     f.inputs do
       f.input :start_date

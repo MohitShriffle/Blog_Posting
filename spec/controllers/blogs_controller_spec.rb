@@ -46,6 +46,7 @@ RSpec.describe BlogsController, type: :controller do
       end
     end
   end
+  
   describe 'GET show' do
     subject do
       request.headers[:token] = bearer_token

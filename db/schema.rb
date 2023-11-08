@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_01_110737) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_07_101317) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -98,11 +98,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_110737) do
     t.date "start_date"
     t.date "end_date"
     t.integer "status"
-    t.boolean "auto_renewal"
     t.integer "user_id", null: false
     t.integer "plan_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "auto_renewal"
     t.index ["plan_id"], name: "index_subscriptions_on_plan_id"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end

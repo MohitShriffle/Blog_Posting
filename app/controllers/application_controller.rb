@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user
     token = request.headers[:token] || params[:token]
-    # header = request.headers['Authorization']
     token = token.split(' ').last if token
     begin
       decoded = jwt_decode(token)
@@ -30,6 +29,7 @@ class ApplicationController < ActionController::Base
       render json: { error: e.message }, status: :unauthorized
     end
   end
+
   rescue_from ActiveRecord::RecordNotFound, with: :handle_exception
 
   def handle_exception

@@ -5,7 +5,7 @@ class Subscription < ApplicationRecord
   belongs_to :user
   belongs_to :plan
   enum :status, %i[active expired canceled]
-  validates :start_date, :end_date, :status, :auto_renewal, presence: true
+  validates :start_date, :end_date, :status, presence: true
 
   def renew
     return unless auto_renewal

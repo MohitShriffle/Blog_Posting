@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_secure_password
   has_one :subscription, dependent: :destroy
   has_many :blogs, dependent: :destroy
-  has_many :blogviews, dependent: :destroy, class_name: 'BlogView'
+  has_many :blog_views, dependent: :destroy, class_name: 'BlogView'
   belongs_to :plan, optional: true
 
   has_one_attached :profile_picture
@@ -20,10 +20,10 @@ class User < ApplicationRecord
   /x }, if: :password_required?
 
   validates :name, :user_name, :email, presence: true
-  validates :email, format: { with: /\A[^@\s]+@gmail\.com\z/i }, uniqueness: true, unless: -> { email.blank? }
+  validates :email, format: { with: /\A[^@\s]+@[A-Z0-9]+\.com\z/i }, uniqueness: true, unless: -> { email.blank? }
 
-  def can_view_blog(blog)
-    return true if BlogView.where(blog:, viewed_at: 24.hours.ago..Time.now).count < 5
+  def can_view_blog(_blog)
+    return true if blog_views.count < 5
 
     false
   end

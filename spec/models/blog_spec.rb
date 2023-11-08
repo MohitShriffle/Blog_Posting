@@ -23,7 +23,7 @@ RSpec.describe Blog, type: :model do
   end
 
   it 'should has_many Blogview' do
-    t = Blog.reflect_on_association(:blogviews)
+    t = Blog.reflect_on_association(:blog_views)
     expect(t.macro).to eq(:has_many)
   end
 end

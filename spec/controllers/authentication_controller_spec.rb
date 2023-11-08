@@ -11,6 +11,7 @@ RSpec.describe AuthenticationController, type: :controller do
       context 'with valid params' do
         it 'Login User' do
           expect(subject).to have_http_status(200)
+          # expect(JSON.parse(response.body)).to eq({"message"=>"Login Succesfull"})
         end
       end
       context 'Login User With invalid parameter' do

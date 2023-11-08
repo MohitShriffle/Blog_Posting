@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :users
+  resources :users, only: %i[index show create update]
   resources :blogs
   resources :users do 
     resources :subscriptions 

@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 # class ResetBlogViewScheduler
-class ResetBlogViewScheduler
+class ResetBlogViewWorker
   include Sidekiq::Worker
   def perform
-    b = BlogView.all
-    b.destroy_all
+    BlogView.destroy_all
   end
 end

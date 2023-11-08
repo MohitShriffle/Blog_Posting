@@ -3,7 +3,7 @@
 # class UsersController
 class UsersController < ApplicationController
   before_action :authenticate_user, except: %i[create send_otp verification]
-  # load_and_authorize_resource
+  before_action :set_user, only: :verification
   def index
     users = User.all
     render json: users, status: :ok
@@ -25,30 +25,23 @@ class UsersController < ApplicationController
   end
 
   def send_otp
-    return render json: { error: 'Email not present' } if params[:email].blank?
-
-    user = User.find_by(email: params[:email])
-    if user.present?
-      user.reset_otp
-      UserMailer.sent_otp_email(user).deliver_now
-      render json: { status: 'Otp Send Succesfully' }, status: :ok
-    else
-      render json: { error: ['Email address not found. Please check and try again.'] }, status: :not_found
+    unless (user = User.find_by(email: params[:email]))
+      return render json: { error: ['Email address not found. Please check and try again.'] },
+                    status: :not_found
     end
+
+    user.reset_otp
+    UserMailer.sent_otp_email(user).deliver_now
+    render json: { status: 'Otp Send Succesfully' }, status: :ok
   end
 
   def verification
-    otp = params[:otp].to_s
-    user = User.find_by(otp:)
-    if user.present? && user.otp_valid
-      if user.complete_verification
-        render json: { status: 'Verification Successful' }, status: :ok
-      else
-        render json: { error: user.errors.full_messages }, status: :unprocessable_entity
-      end
-    else
-      render json: { error: ['Link not valid or expired. Try generating a new link.'] }, status: :unprocessable_entity
+    unless @user.otp_valid
+      return render json: { error: ['Link not valid or expired. Try generating a new link.'] },
+                    status: :unprocessable_entity
     end
+
+    render json: { status: 'Verification Successful' }, status: :ok if @user.complete_verification
   end
 
   def update
@@ -70,5 +63,12 @@ class UsersController < ApplicationController
       :profile_picture,
       :type
     )
+  end
+
+  def set_user
+    return if (@user = User.find_by(otp: params[:otp].to_s))
+
+    render json: { error: ['User not present for this otp'] },
+           status: 404
   end
 end

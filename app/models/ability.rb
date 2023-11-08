@@ -6,7 +6,6 @@ class Ability
 
   def initialize(user)
     can :read, Blog, visible: true
-
     return if user.blank?
 
     # can :read, Plan, visible: true
@@ -20,5 +19,6 @@ class Ability
     can :read, Subscription, user_id: user.id
     can :blog_read, Blog
     can :manage, Blog, { user: }
+    can :manage, Subscription, { user: }
   end
 end
