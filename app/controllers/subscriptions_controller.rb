@@ -7,6 +7,7 @@ class SubscriptionsController < ApplicationController
   before_action :authenticate_user
   load_and_authorize_resource
   def index
+    byebug
     render json: @current_user.subscription, status: :ok
   end
 
@@ -15,18 +16,18 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
-    if check_valid_attributes == true
-      duration = { weekly: 7, monthly: 30 }
-      subscription = Subscription.new(
-        start_date: Date.today,
-        end_date: Date.today + duration[@plan.duration.parameterize.underscore.to_sym],
-        status: 'active',
-        auto_renewal: params[:auto_renewal],
-        plan: @plan,
-        user: @current_user
-      )
-      render json: subscription, status: 201 if subscription.save
-    end
+    return unless check_valid_attributes == true
+
+    duration = { weekly: 7, monthly: 30 }
+    subscription = Subscription.new(
+      start_date: Date.today,
+      end_date: Date.today + duration[@plan.duration.parameterize.underscore.to_sym],
+      status: 'active',
+      auto_renewal: params[:auto_renewal],
+      plan: @plan,
+      user: @current_user
+    )
+    render json: subscription, status: 201 if subscription.save
   end
 
   def update
@@ -68,10 +69,13 @@ class SubscriptionsController < ApplicationController
   end
 
   def set_plan
-    render json: { message: 'Plan Not Found' },status: 404 unless (@plan = Plan.find_by(id: params[:plan_id].to_s))
+    render json: { message: 'Plan Not Found' }, status: 404 unless (@plan = Plan.find_by(id: params[:plan_id].to_s))
   end
 
   def set_subscription
-    return render json: { message: 'subscription Not Found' },status: 404 unless (@subscription = Subscription.find_by(id: params[:id]))
+    unless (@subscription = Subscription.find_by(id: params[:id]))
+      render json: { message: 'subscription Not Found' },
+                        status: 404
+    end
   end
 end

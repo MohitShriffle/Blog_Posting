@@ -15,6 +15,7 @@ RSpec.describe SubscriptionsController, type: :controller do
       let(:bearer_token) { '' }
       it "return unauthorized" do
         subscription.save
+        byebug
         expect(subject).to have_http_status(401)
         expect(JSON.parse(subject.body)).to eq({"error"=>"Nil JSON web token"})
       end
@@ -23,6 +24,7 @@ RSpec.describe SubscriptionsController, type: :controller do
       context 'with valid token' do
         it 'returns subscription' do
           subscription.save
+          byebug
           expect(JSON.parse(subject.body)).to eq({"id"=>1, "start_date" => Date.today.strftime('%Y-%m-%d'), "end_date" => (Date.today + 7).strftime('%Y-%m-%d'), "status"=>"active", "auto_renewal"=>true})
           expect(subject).to have_http_status(200)
         end
@@ -58,10 +60,10 @@ RSpec.describe SubscriptionsController, type: :controller do
         end
       end
     end
-   end
+  end
 
 
-   describe 'PATCH Update' do
+  describe 'PATCH Update' do
     let(:params) { {id: subscription.id, status: 'expired'} }
     subject do
       request.headers[:token] = bearer_token

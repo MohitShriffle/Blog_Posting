@@ -4,7 +4,6 @@
 class ResetBlogViewsCountWorker
   include Sidekiq::Worker
   def perform
-    u = User.all
-    u.update_all(blog_views_count: 0)
+    User.update_all(blog_views_count: 0)
   end
 end

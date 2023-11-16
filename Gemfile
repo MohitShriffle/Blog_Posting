@@ -25,7 +25,7 @@ gem 'redis', '~> 4.8.0'
 gem 'sidekiq', '~> 6.1.0'
 gem 'sidekiq-cron'
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem 'letter_opener', group: :development
+# gem 'letter_opener', group: :development
 # gem 'turbo-rails'
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem 'stimulus-rails'

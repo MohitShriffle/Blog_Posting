@@ -4,12 +4,12 @@
 class UsersController < ApplicationController
   before_action :authenticate_user, except: %i[create send_otp verification]
   before_action :set_user, only: :verification
-  def index
-    users = User.all
-    render json: users, status: :ok
-    # render json: users.page(params[:page])
-  end
 
+  def index 
+    users=User.all
+    render json: users 
+  end
+  
   def show
     render json: @current_user
   end
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
-      # UserMailer.with(user:).welcome_email.deliver_now
+      UserMailer.with(user:).welcome_email.deliver_now
       render json: user, status: :created
     else
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity

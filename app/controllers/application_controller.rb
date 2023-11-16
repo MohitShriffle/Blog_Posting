@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user
     token = request.headers[:token] || params[:token]
-    token = token.split(' ').last if token
     begin
       decoded = jwt_decode(token)
       @current_user = User.find(decoded[:user_id])

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  let(:user) { FactoryBot.build(:user) }
+  let(:user) { FactoryBot.create(:user) }
 
   let(:bearer_token) { jwt_token_1(user) }
 
@@ -13,7 +13,6 @@ RSpec.describe UsersController, type: :controller do
     context 'without token' do
       let(:bearer_token) { '' }
       it "return unauthorized" do
-        user.save
         expect(subject).to have_http_status(401)
         expect(JSON.parse(subject.body)).to eq({"error"=>"Nil JSON web token"})
       end
@@ -21,7 +20,6 @@ RSpec.describe UsersController, type: :controller do
     context 'with token' do
       context 'with valid token' do
         it 'returns all the users' do
-          user.save
           expect(subject).to have_http_status(200)
           expect(JSON.parse(subject.body)).to eq([{"id"=>1, "name"=>user.name, "user_name"=>user.user_name, "email"=>user.email, "type"=>user.type, "profile_picture_url"=>nil}])
         end
@@ -30,6 +28,7 @@ RSpec.describe UsersController, type: :controller do
   end
   
   describe 'POST create' do
+    let(:user) { FactoryBot.build(:user) }
     let(:params) {{name: user.name,user_name: user.user_name,email: user.email,password:user.password,type: "Normal"}}
     subject do
       post :create, params: params

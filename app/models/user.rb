@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'csv' 
 # user class
 class User < ApplicationRecord
   paginates_per 2
@@ -22,12 +22,21 @@ class User < ApplicationRecord
   validates :name, :user_name, :email, presence: true
   validates :email, format: { with: /\A[^@\s]+@[A-Z0-9]+\.com\z/i }, uniqueness: true, unless: -> { email.blank? }
 
-  def can_view_blog(_blog)
-    return true if blog_views.count < 5
-
-    false
+  def can_view_blog(blog)
+    return true if BlogView.where(blog: blog, user: self ).count < 5
+    false                                            
   end
-
+  
+  # def self.to_csv
+  #   attributes =%w{id name user_name email }
+  #   CSV.generate(headers: true) do |csv|
+  #     csv << attributes 
+  #     all.each  do |user|
+  #       csv << attributes.map {|attr| user.send(attr)}
+  #     end
+  #   end
+  # end 
+ 
   def reset_otp
     update(otp: generate_otp)
     update(otp_sent_at: Time.now.utc)

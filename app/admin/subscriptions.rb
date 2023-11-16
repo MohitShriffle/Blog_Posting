@@ -21,8 +21,8 @@ ActiveAdmin.register Subscription do
       f.input :end_date
       f.input :auto_renewal
       f.input :status
-      f.input :user_id
-      f.input :plan_id
+      f.input :user
+      f.input :plan
     end
     f.actions
   end

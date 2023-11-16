@@ -23,3 +23,7 @@ update_subscription_status_worker:
   class: 'UpdateSubscriptionStatusWorker'
   queue: 'default'
 
+daily_blog_views_report_worker: 
+  cron: '* * * * *'
+  class: 'DailyBlogViewsReportWorker'
+  queue: 'default'

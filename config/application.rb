@@ -28,7 +28,7 @@ module BlogPosting
     # in config/environments, which are processed later.
     #
     # config.time_zone = "Central Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
+    config.eager_load_paths << Rails.root.join("app/services")
     config.api_only = true
   end
 end
