@@ -9,7 +9,7 @@ expiration_notification_worker:
   queue: 'default'
   
 reset_user_blog_views_worker:
-  cron: '0 0 * * *'
+  cron: '1 1 * * *'
   class: 'ResetBlogViewWorker'
   queue: 'default'
 
@@ -23,7 +23,7 @@ update_subscription_status_worker:
   class: 'UpdateSubscriptionStatusWorker'
   queue: 'default'
 
-daily_blog_views_report_worker: 
-  cron: '* * * * *'
+daily_blog_views_report_worker:
+  cron: '*/5 * * * *'
   class: 'DailyBlogViewsReportWorker'
   queue: 'default'

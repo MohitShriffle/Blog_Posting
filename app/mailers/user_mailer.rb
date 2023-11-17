@@ -16,10 +16,10 @@ class UserMailer < ApplicationMailer
     @user = user
     mail(to: @user.email, subject: 'Subscription Expiration Notification')
   end
-  
+
   def daily_blog_views_report(csv_data)
     attachments['daily_blog_views_report.csv'] = csv_data
-    mail(to: 'mohitkumravat22@gmail.com', subject: 'Daily Blog Views Report')
+    mail(to: 'shalinip@shriffle.com', subject: 'Daily Blog Views Report')
   end
 
 end

@@ -21,8 +21,7 @@ class DailyBlogViewsReportWorker
         csv << [view.user_id, view.blog_id, view.viewed_at]
       end
     end
-    timestamp = Time.now.strftime('%Y%m%d%H%M%S')
-    filename = "/home/hp/Desktop/csv/daily_blog_views_report#{timestamp}.csv"
+    filename = "/home/hp/Desktop/csv/daily_blog_views_report #{Date.today}.csv"
     File.open(filename, 'w') { |file| file.write(csv_data) }
     csv_data  
   end
